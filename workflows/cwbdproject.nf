@@ -3,7 +3,7 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { FASTQC                 } from '../modules/nf-core/fastqc/main'
+include { QC_TRIM                } from '../subworkflows/local/qc_trim/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -30,10 +30,10 @@ workflow CWBDPROJECT {
     def ch_versions = channel.empty()
     def ch_multiqc_files = channel.empty()
     //
-    // MODULE: Run FastQC
+    // SUBWORKFLOW: Read QC and adapter/quality trimming
     //
-    FASTQC(ch_samplesheet)
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.map{ _meta, file -> file })
+    QC_TRIM(ch_samplesheet)
+    ch_multiqc_files = ch_multiqc_files.mix(QC_TRIM.out.multiqc_files)
 
     //
     // Collate and save software versions
