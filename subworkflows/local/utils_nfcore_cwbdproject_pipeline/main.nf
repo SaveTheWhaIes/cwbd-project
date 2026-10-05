@@ -1,5 +1,5 @@
 //
-// Subworkflow with functionality specific to the SaveTheWhaIes/cwbdproject pipeline
+// Subworkflow with functionality specific to the SaveTheWhaIes/cwbd-project pipeline
 //
 
 /*

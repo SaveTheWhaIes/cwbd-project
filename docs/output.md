@@ -1,4 +1,4 @@
-# SaveTheWhaIes/cwbdproject: Output
+# SaveTheWhaIes/cwbd-project: Output
 
 ## Introduction
 

@@ -15,11 +15,11 @@ jobs:
     steps:
       # PRs to the nf-core repo main/master branch are only ok if coming from the nf-core repo `dev` or any `patch` branches
       - name: Check PRs
-        if: github.repository == 'SaveTheWhaIes/cwbdproject'
+        if: github.repository == 'SaveTheWhaIes/cwbd-project'
         env:
           HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
         run: |
-          { [[ "$HEAD_REPO" == SaveTheWhaIes/cwbdproject ]] && [[ $GITHUB_HEAD_REF == "dev" ]]; } || [[ $GITHUB_HEAD_REF == "patch" ]]
+          { [[ "$HEAD_REPO" == SaveTheWhaIes/cwbd-project ]] && [[ $GITHUB_HEAD_REF == "dev" ]]; } || [[ $GITHUB_HEAD_REF == "patch" ]]
 
       # If the above check failed, build a comment to be posted by the shared poster workflow
       - name: Build PR comment

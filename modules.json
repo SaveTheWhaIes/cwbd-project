@@ -1,6 +1,6 @@
 {
-    "name": "SaveTheWhaIes/cwbdproject",
-    "homePage": "https://github.com/SaveTheWhaIes/cwbdproject",
+    "name": "SaveTheWhaIes/cwbd-project",
+    "homePage": "https://github.com/SaveTheWhaIes/cwbd-project",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
