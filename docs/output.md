@@ -13,6 +13,7 @@ The directories listed below will be created in the results directory after the 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
 - [FastQC](#fastqc) - Raw read QC
+- [fastp](#fastp) - Adapter and quality trimming
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -27,7 +28,21 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 </details>
 
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/). Samples sequenced in several runs (more than one samplesheet row with the same `sample`) are merged first, so there is one FastQC report per sample and read direction.
+
+### fastp
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `fastp/`
+  - `*.fastp.html`: fastp report with read quality, adapter content and filtering statistics before and after trimming.
+  - `*.fastp.json`: the same statistics in machine readable form, parsed by MultiQC.
+  - `*.fastp.log`: fastp command line output.
+
+</details>
+
+[fastp](https://github.com/OpenGene/fastp) removes adapter sequences (detected automatically) and low quality bases from the reads. Bases below Phred 20 count as low quality, and reads shorter than 36 bp after trimming are discarded. The trimmed reads are not published by default; they are passed directly to the alignment step.
 
 ### MultiQC
 
