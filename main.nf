@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    SaveTheWhaIes/cwbdproject
+    SaveTheWhaIes/cwbd-project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/SaveTheWhaIes/cwbdproject
+    Github : https://github.com/SaveTheWhaIes/cwbd-project
 ----------------------------------------------------------------------------------------
 */
 

@@ -7,9 +7,9 @@ lint:
     - docs/CONTRIBUTING.md
     - .prettierignore
     - CODE_OF_CONDUCT.md
-    - assets/nf-core-cwbdproject_logo_light.png
-    - docs/images/nf-core-cwbdproject_logo_light.png
-    - docs/images/nf-core-cwbdproject_logo_dark.png
+    - assets/nf-core-cwbd-project_logo_light.png
+    - docs/images/nf-core-cwbd-project_logo_light.png
+    - docs/images/nf-core-cwbd-project_logo_dark.png
     - .github/ISSUE_TEMPLATE/bug_report.yml
     - .github/PULL_REQUEST_TEMPLATE.md
     - assets/email_template.txt
@@ -24,9 +24,9 @@ lint:
     - assets/sendmail_template.txt
     - assets/email_template.txt
     - CODE_OF_CONDUCT.md
-    - assets/nf-core-cwbdproject_logo_light.png
-    - docs/images/nf-core-cwbdproject_logo_light.png
-    - docs/images/nf-core-cwbdproject_logo_dark.png
+    - assets/nf-core-cwbd-project_logo_light.png
+    - docs/images/nf-core-cwbd-project_logo_light.png
+    - docs/images/nf-core-cwbd-project_logo_dark.png
     - .github/ISSUE_TEMPLATE/config.yml
     - .github/workflows/awstest.yml
     - .github/workflows/awsfulltest.yml
