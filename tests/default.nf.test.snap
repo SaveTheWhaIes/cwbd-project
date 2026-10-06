@@ -22,6 +22,9 @@
                     "hisat2": "2.2.3",
                     "samtools": 1.24
                 },
+                "PICARD_MARKDUPLICATES": {
+                    "picard": "3.5.0"
+                },
                 "SAMTOOLS_SORT": {
                     "samtools": 1.24
                 },
@@ -100,8 +103,14 @@
                 "multiqc/multiqc_data/multiqc_fastqc.txt",
                 "multiqc/multiqc_data/multiqc_general_stats.txt",
                 "multiqc/multiqc_data/multiqc_hisat2.txt",
+                "multiqc/multiqc_data/multiqc_picard_dups.txt",
                 "multiqc/multiqc_data/multiqc_software_versions.txt",
                 "multiqc/multiqc_data/multiqc_sources.txt",
+                "multiqc/multiqc_data/picard_MarkIlluminaAdapters_histogram.txt",
+                "multiqc/multiqc_data/picard_MeanQualityByCycle_histogram.txt",
+                "multiqc/multiqc_data/picard_MeanQualityByCycle_histogram_1.txt",
+                "multiqc/multiqc_data/picard_QualityScoreDistribution_histogram.txt",
+                "multiqc/multiqc_data/picard_deduplication.txt",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/pdf",
                 "multiqc/multiqc_plots/pdf/fastp-insert-size-plot.pdf",
@@ -135,6 +144,8 @@
                 "multiqc/multiqc_plots/pdf/hisat2_pe_plot-pct.pdf",
                 "multiqc/multiqc_plots/pdf/hisat2_se_plot-cnt.pdf",
                 "multiqc/multiqc_plots/pdf/hisat2_se_plot-pct.pdf",
+                "multiqc/multiqc_plots/pdf/picard_deduplication-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/picard_deduplication-pct.pdf",
                 "multiqc/multiqc_plots/png",
                 "multiqc/multiqc_plots/png/fastp-insert-size-plot.png",
                 "multiqc/multiqc_plots/png/fastp-seq-content-gc-plot_Read_1_After_filtering.png",
@@ -167,6 +178,8 @@
                 "multiqc/multiqc_plots/png/hisat2_pe_plot-pct.png",
                 "multiqc/multiqc_plots/png/hisat2_se_plot-cnt.png",
                 "multiqc/multiqc_plots/png/hisat2_se_plot-pct.png",
+                "multiqc/multiqc_plots/png/picard_deduplication-cnt.png",
+                "multiqc/multiqc_plots/png/picard_deduplication-pct.png",
                 "multiqc/multiqc_plots/svg",
                 "multiqc/multiqc_plots/svg/fastp-insert-size-plot.svg",
                 "multiqc/multiqc_plots/svg/fastp-seq-content-gc-plot_Read_1_After_filtering.svg",
@@ -199,7 +212,22 @@
                 "multiqc/multiqc_plots/svg/hisat2_pe_plot-pct.svg",
                 "multiqc/multiqc_plots/svg/hisat2_se_plot-cnt.svg",
                 "multiqc/multiqc_plots/svg/hisat2_se_plot-pct.svg",
+                "multiqc/multiqc_plots/svg/picard_deduplication-cnt.svg",
+                "multiqc/multiqc_plots/svg/picard_deduplication-pct.svg",
                 "multiqc/multiqc_report.html",
+                "picard",
+                "picard/RAP1_UNINDUCED_REP1.markdup.sorted.bai",
+                "picard/RAP1_UNINDUCED_REP1.markdup.sorted.bam",
+                "picard/RAP1_UNINDUCED_REP1.markdup.sorted.metrics.txt",
+                "picard/RAP1_UNINDUCED_REP2.markdup.sorted.bai",
+                "picard/RAP1_UNINDUCED_REP2.markdup.sorted.bam",
+                "picard/RAP1_UNINDUCED_REP2.markdup.sorted.metrics.txt",
+                "picard/WT_REP1.markdup.sorted.bai",
+                "picard/WT_REP1.markdup.sorted.bam",
+                "picard/WT_REP1.markdup.sorted.metrics.txt",
+                "picard/WT_REP2.markdup.sorted.bai",
+                "picard/WT_REP2.markdup.sorted.bam",
+                "picard/WT_REP2.markdup.sorted.metrics.txt",
                 "pipeline_info",
                 "pipeline_info/cwbdproject_software_mqc_versions.yml"
             ],
@@ -236,10 +264,16 @@
                 "hisat2_se_plot.txt:md5,7e5ae7ae731419932b2f69d44acd05e0",
                 "multiqc_citations.txt:md5,1c55f861c39e3dd84bcbec2da77ab98a",
                 "multiqc_fastqc.txt:md5,4a5f3c5e77d35125a61b11f4a7b13681",
-                "multiqc_hisat2.txt:md5,93480fa34e8fb19313817df369dbe04b"
+                "multiqc_hisat2.txt:md5,93480fa34e8fb19313817df369dbe04b",
+                "multiqc_picard_dups.txt:md5,7f54897802eaf271c44211712578ad87",
+                "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "picard_MeanQualityByCycle_histogram_1.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "picard_QualityScoreDistribution_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                "picard_deduplication.txt:md5,d2d2855a15ab63cf2324db0e16c7927a"
             ]
         ],
-        "timestamp": "2026-10-06T13:49:13.401874522",
+        "timestamp": "2026-10-06T14:19:41.130108539",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
