@@ -9,15 +9,26 @@ Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https:
 
 ### `Added`
 
-- ALIGN subworkflow: HISAT2 alignment (index built from `--fasta`/`--gtf` unless `--hisat2_index` is given), coordinate sorting and indexing with SAMtools.
+- [#2](https://github.com/SaveTheWhaIes/cwbd-project/pull/2) QC_TRIM subworkflow: merges runs of the same sample, runs FastQC on the raw reads and trims adapters and low quality bases with fastp.
+- [#3](https://github.com/SaveTheWhaIes/cwbd-project/pull/3) Samplesheet column `strandedness` (`forward`, `reverse`, `unstranded`), checked to be the same for all runs of a sample.
+- [#3](https://github.com/SaveTheWhaIes/cwbd-project/pull/3) Reference parameters `--fasta`, `--gtf` and `--hisat2_index`.
+- [#4](https://github.com/SaveTheWhaIes/cwbd-project/pull/4) ALIGN subworkflow: HISAT2 alignment (index built from `--fasta`/`--gtf` unless `--hisat2_index` is given), coordinate sorting and indexing with SAMtools.
+- [#3](https://github.com/SaveTheWhaIes/cwbd-project/pull/3) Test profile on the nf-core/rnaseq yeast test data (GSE110004) and nf-test snapshot of the test run.
+- MARKDUP subworkflow: Picard MarkDuplicates flags duplicate reads and reports duplication metrics to MultiQC.
 
 ### `Fixed`
+
+- [#1](https://github.com/SaveTheWhaIes/cwbd-project/pull/1) Repository name `cwbd-project` used throughout the template, default branch `main`.
 
 ### `Dependencies`
 
 | Dependency | Old version | New version |
 | ---------- | ----------- | ----------- |
+| `fastqc`   |             | 0.12.1      |
+| `fastp`    |             | 1.3.6       |
 | `hisat2`   |             | 2.2.3       |
 | `samtools` |             | 1.24        |
+| `picard`   |             | 3.5.0       |
+| `multiqc`  |             | 1.35        |
 
 ### `Deprecated`
