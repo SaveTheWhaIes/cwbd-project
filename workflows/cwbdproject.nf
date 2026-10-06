@@ -6,6 +6,7 @@
 include { QC_TRIM                } from '../subworkflows/local/qc_trim/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { ALIGN                  } from '../subworkflows/local/align/main'
+include { MARKDUP                } from '../subworkflows/local/markdup/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -46,6 +47,12 @@ workflow CWBDPROJECT {
         params.hisat2_index ? file(params.hisat2_index, checkIfExists: true) : []
     )
     ch_multiqc_files = ch_multiqc_files.mix(ALIGN.out.multiqc_files)
+
+    //
+    // SUBWORKFLOW: Mark PCR/optical duplicates (flagged, not removed)
+    //
+    MARKDUP(ALIGN.out.bam)
+    ch_multiqc_files = ch_multiqc_files.mix(MARKDUP.out.multiqc_files)
 
     //
     // Collate and save software versions
