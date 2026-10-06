@@ -5,6 +5,7 @@
 */
 include { QC_TRIM                } from '../subworkflows/local/qc_trim/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+include { ALIGN                  } from '../subworkflows/local/align/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -34,6 +35,17 @@ workflow CWBDPROJECT {
     //
     QC_TRIM(ch_samplesheet)
     ch_multiqc_files = ch_multiqc_files.mix(QC_TRIM.out.multiqc_files)
+
+    //
+    // SUBWORKFLOW: Align trimmed reads with HISAT2, sort and index
+    //
+    ALIGN(
+        QC_TRIM.out.reads,
+        file(params.fasta, checkIfExists: true),
+        file(params.gtf, checkIfExists: true),
+        params.hisat2_index ? file(params.hisat2_index, checkIfExists: true) : []
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(ALIGN.out.multiqc_files)
 
     //
     // Collate and save software versions

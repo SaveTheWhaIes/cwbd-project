@@ -14,6 +14,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 - [FastQC](#fastqc) - Raw read QC
 - [fastp](#fastp) - Adapter and quality trimming
+- [HISAT2](#hisat2) - Alignment to the genome
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -43,6 +44,18 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 </details>
 
 [fastp](https://github.com/OpenGene/fastp) removes adapter sequences (detected automatically) and low quality bases from the reads. Bases below Phred 20 count as low quality, and reads shorter than 36 bp after trimming are discarded. The trimmed reads are not published by default; they are passed directly to the alignment step.
+
+### HISAT2
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `hisat2/log/`
+  - `*.log`: HISAT2 alignment report containing the mapping results summary.
+
+</details>
+
+[HISAT2](http://daehwankimlab.github.io/hisat2/) is a fast and sensitive alignment program for mapping next-generation sequencing reads (both DNA and RNA) to a population of human genomes as well as to a single reference genome. It introduced a new indexing scheme called a Hierarchical Graph FM index (HGFM) which when combined with several alignment strategies, enable rapid and accurate alignment of sequencing reads. The aligned reads are coordinate sorted and indexed with [SAMtools](https://sourceforge.net/projects/samtools/files/samtools/) and passed on to duplicate marking; they are not published separately.
 
 ### MultiQC
 

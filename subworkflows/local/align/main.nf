@@ -3,7 +3,6 @@ include { HISAT2_BUILD              } from '../../../modules/nf-core/hisat2/buil
 include { HISAT2_ALIGN              } from '../../../modules/nf-core/hisat2/align/main'
 include { SAMTOOLS_SORT             } from '../../../modules/nf-core/samtools/sort/main'
 
-
 workflow ALIGN {
 
     take:
@@ -13,7 +12,7 @@ workflow ALIGN {
     hisat2_index // path: prebuilt HISAT2 index directory, or [] to build one
 
     main:
-    // Splice sites from the GTF for the index build and during alignment
+    // Splice sites from the GTF, used for the index build and again during alignment.
     // Value channels throughout, so every sample reuses the same reference files
     HISAT2_EXTRACTSPLICESITES(channel.value([ [id: 'genome'], gtf ]))
     def ch_splicesites = HISAT2_EXTRACTSPLICESITES.out.txt
@@ -24,7 +23,7 @@ workflow ALIGN {
     } else {
         HISAT2_BUILD(
             ch_splicesites.map { meta, splicesites -> [ meta, fasta, gtf, splicesites ] },
-            '200.GB' // splice aware index only with this much memory
+            '200.GB' // splice aware index only with this much memory (nf-core/rnaseq default)
         )
         ch_index = HISAT2_BUILD.out.index
     }
@@ -33,8 +32,11 @@ workflow ALIGN {
         ch_reads,
         ch_index,
         ch_splicesites,
-        false
+        false // save_unaligned
     )
+
+    // Coordinate sort; 'bai' makes samtools write the index in the same step
+    SAMTOOLS_SORT(HISAT2_ALIGN.out.bam, [ [:], [], [] ], 'bai')
 
     def ch_multiqc_files = HISAT2_ALIGN.out.summary.map { _meta, log -> log }
 
