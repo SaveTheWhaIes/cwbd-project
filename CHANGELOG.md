@@ -9,8 +9,15 @@ Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https:
 
 ### `Added`
 
+- ALIGN subworkflow: HISAT2 alignment (index built from `--fasta`/`--gtf` unless `--hisat2_index` is given), coordinate sorting and indexing with SAMtools.
+
 ### `Fixed`
 
 ### `Dependencies`
+
+| Dependency | Old version | New version |
+| ---------- | ----------- | ----------- |
+| `hisat2`   |             | 2.2.3       |
+| `samtools` |             | 1.24        |
 
 ### `Deprecated`

@@ -27,7 +27,9 @@
 1. Merge re-sequenced FASTQ files of the same sample ([`cat`](https://www.gnu.org/software/coreutils/manual/html_node/cat-invocation.html))
 2. Raw read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
 3. Adapter and quality trimming ([`fastp`](https://github.com/OpenGene/fastp))
-4. Present QC for all steps ([`MultiQC`](http://multiqc.info/))
+4. Alignment to the genome ([`HiSAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml))
+5. Sort and index alignments ([`SAMtools`](https://sourceforge.net/projects/samtools/files/samtools/))
+6. Present QC for all steps ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
