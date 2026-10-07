@@ -1,6 +1,0 @@
-Module	Section	Sample Name	Source
-Picard	DuplicationMetrics	HUMAN_CHR22	/data/cwbd-project/work/86/960aa5956f74512fb8affb65cf33ad/7/HUMAN_CHR22.markdup.sorted.metrics.txt
-HISAT2	all_sections	HUMAN_CHR22	/data/cwbd-project/work/86/960aa5956f74512fb8affb65cf33ad/6/HUMAN_CHR22.hisat2.summary.log
-fastp	all_sections	HUMAN_CHR22	/data/cwbd-project/work/86/960aa5956f74512fb8affb65cf33ad/5/HUMAN_CHR22.fastp.json
-FastQC	all_sections	HUMAN_CHR22_1	/data/cwbd-project/work/86/960aa5956f74512fb8affb65cf33ad/3/HUMAN_CHR22_1_fastqc.zip
-FastQC	all_sections	HUMAN_CHR22_2	/data/cwbd-project/work/86/960aa5956f74512fb8affb65cf33ad/4/HUMAN_CHR22_2_fastqc.zip
