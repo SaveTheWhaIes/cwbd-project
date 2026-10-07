@@ -9,7 +9,7 @@ workflow ALIGN {
     ch_reads     // channel: [ val(meta), [ reads ] ], trimmed
     fasta        // path: genome FASTA
     gtf          // path: gene annotation GTF
-    hisat2_index // path: prebuilt HISAT2 index directory, or [] to build one
+    hisat2_index // channel: [ val(meta), path(index) ], or [] to build one
 
     main:
     // Splice sites from the GTF, used for the index build and again during alignment.
@@ -19,7 +19,7 @@ workflow ALIGN {
 
     def ch_index = channel.empty()
     if (hisat2_index) {
-        ch_index = channel.value([ [id: 'genome'], hisat2_index ])
+        ch_index = hisat2_index
     } else {
         HISAT2_BUILD(
             ch_splicesites.map { meta, splicesites -> [ meta, fasta, gtf, splicesites ] },

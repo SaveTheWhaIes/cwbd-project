@@ -1,0 +1,34 @@
+Detecting adapter sequence for read1...
+>Illumina TruSeq Adapter Read 1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCA
+
+Read1 before filtering:
+total reads: 100000
+total bases: 10100000
+Q20 bases: 9707964(96.1185%)
+Q30 bases: 9337559(92.4511%)
+Q40 bases: 0(0%)
+
+Read1 after filtering:
+total reads: 98060
+total bases: 9785625
+Q20 bases: 9494055(97.0204%)
+Q30 bases: 9176287(93.7731%)
+Q40 bases: 0(0%)
+
+Filtering result:
+reads passed filter: 98060
+reads failed due to low quality: 1889
+reads failed due to too many N: 51
+reads failed due to too short: 0
+reads failed due to adapter dimer: 0
+reads with adapter trimmed: 7431
+bases trimmed due to adapters: 120060
+
+Duplication rate (may be overestimated since this is SE data): 61.333%
+
+JSON report: RAP1_UNINDUCED_REP2.fastp.json
+HTML report: RAP1_UNINDUCED_REP2.fastp.html
+
+fastp --in1 RAP1_UNINDUCED_REP2.fastq.gz --out1 RAP1_UNINDUCED_REP2.fastp.fastq.gz --thread 6 --json RAP1_UNINDUCED_REP2.fastp.json --html RAP1_UNINDUCED_REP2.fastp.html --qualified_quality_phred 20 --length_required 36 
+fastp v1.3.6, time used: 2 seconds

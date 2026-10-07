@@ -1,0 +1,5 @@
+Sample	Passed Filter	Low Quality	Too Many N	Low Complexity	Too Short	Too Long
+RAP1_UNINDUCED_REP1	48911.0	1072.0	17.0	nan	0.0	0.0
+RAP1_UNINDUCED_REP2	98060.0	1889.0	51.0	nan	0.0	0.0
+WT_REP1	190944.0	8774.0	280.0	nan	2.0	0.0
+WT_REP2	95922.0	3926.0	152.0	nan	0.0	0.0
