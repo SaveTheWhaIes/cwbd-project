@@ -1,3 +1,6 @@
+// MODULE: MERGE_TPM
+// merges the per sample expression into one table with TPM values
+
 process MERGE_TPM {
     label 'process_single'
 
@@ -16,11 +19,14 @@ process MERGE_TPM {
     when:
     task.ext.when == null || task.ext.when
 
+    // merge_tpm.py lies in bin/
+    // nextflow puts bin/ on the PATH for every task
     script:
     """
     merge_tpm.py --output gene_tpm.tsv ${abundances}
     """
 
+    // creates an empty file to test the channel logic quickly
     stub:
     """
     touch gene_tpm.tsv
