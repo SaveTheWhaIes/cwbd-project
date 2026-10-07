@@ -22,11 +22,17 @@
                     "hisat2": "2.2.3",
                     "samtools": 1.24
                 },
+                "MERGE_TPM": {
+                    "python": "3.14.5"
+                },
                 "PICARD_MARKDUPLICATES": {
                     "picard": "3.5.0"
                 },
                 "SAMTOOLS_SORT": {
                     "samtools": 1.24
+                },
+                "STRINGTIE_STRINGTIE": {
+                    "stringtie": "3.0.3"
                 },
                 "Workflow": {
                     "SaveTheWhaIes/cwbd-project": "v1.0.0dev"
@@ -229,7 +235,46 @@
                 "picard/WT_REP2.markdup.sorted.bam",
                 "picard/WT_REP2.markdup.sorted.metrics.txt",
                 "pipeline_info",
-                "pipeline_info/cwbdproject_software_mqc_versions.yml"
+                "pipeline_info/cwbdproject_software_mqc_versions.yml",
+                "stringtie",
+                "stringtie/RAP1_UNINDUCED_REP1.ballgown",
+                "stringtie/RAP1_UNINDUCED_REP1.ballgown/e2t.ctab",
+                "stringtie/RAP1_UNINDUCED_REP1.ballgown/e_data.ctab",
+                "stringtie/RAP1_UNINDUCED_REP1.ballgown/i2t.ctab",
+                "stringtie/RAP1_UNINDUCED_REP1.ballgown/i_data.ctab",
+                "stringtie/RAP1_UNINDUCED_REP1.ballgown/t_data.ctab",
+                "stringtie/RAP1_UNINDUCED_REP1.coverage.gtf",
+                "stringtie/RAP1_UNINDUCED_REP1.gene.abundance.txt",
+                "stringtie/RAP1_UNINDUCED_REP1.transcripts.gtf",
+                "stringtie/RAP1_UNINDUCED_REP2.ballgown",
+                "stringtie/RAP1_UNINDUCED_REP2.ballgown/e2t.ctab",
+                "stringtie/RAP1_UNINDUCED_REP2.ballgown/e_data.ctab",
+                "stringtie/RAP1_UNINDUCED_REP2.ballgown/i2t.ctab",
+                "stringtie/RAP1_UNINDUCED_REP2.ballgown/i_data.ctab",
+                "stringtie/RAP1_UNINDUCED_REP2.ballgown/t_data.ctab",
+                "stringtie/RAP1_UNINDUCED_REP2.coverage.gtf",
+                "stringtie/RAP1_UNINDUCED_REP2.gene.abundance.txt",
+                "stringtie/RAP1_UNINDUCED_REP2.transcripts.gtf",
+                "stringtie/WT_REP1.ballgown",
+                "stringtie/WT_REP1.ballgown/e2t.ctab",
+                "stringtie/WT_REP1.ballgown/e_data.ctab",
+                "stringtie/WT_REP1.ballgown/i2t.ctab",
+                "stringtie/WT_REP1.ballgown/i_data.ctab",
+                "stringtie/WT_REP1.ballgown/t_data.ctab",
+                "stringtie/WT_REP1.coverage.gtf",
+                "stringtie/WT_REP1.gene.abundance.txt",
+                "stringtie/WT_REP1.transcripts.gtf",
+                "stringtie/WT_REP2.ballgown",
+                "stringtie/WT_REP2.ballgown/e2t.ctab",
+                "stringtie/WT_REP2.ballgown/e_data.ctab",
+                "stringtie/WT_REP2.ballgown/i2t.ctab",
+                "stringtie/WT_REP2.ballgown/i_data.ctab",
+                "stringtie/WT_REP2.ballgown/t_data.ctab",
+                "stringtie/WT_REP2.coverage.gtf",
+                "stringtie/WT_REP2.gene.abundance.txt",
+                "stringtie/WT_REP2.transcripts.gtf",
+                "tpm",
+                "tpm/gene_tpm.tsv"
             ],
             [
                 "RAP1_UNINDUCED_REP1.hisat2.summary.log:md5,46faca8ac38bd280ef891c82632b0693",
@@ -270,10 +315,31 @@
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_QualityScoreDistribution_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                "picard_deduplication.txt:md5,d2d2855a15ab63cf2324db0e16c7927a"
+                "picard_deduplication.txt:md5,d2d2855a15ab63cf2324db0e16c7927a",
+                "e2t.ctab:md5,c76a3f5e18ad925437ccdfd30687a3a6",
+                "e_data.ctab:md5,d1b914ed28bd3f0eef1387d4d63fc038",
+                "i2t.ctab:md5,fa6933716b2dff2c89374e882fc84de2",
+                "i_data.ctab:md5,80de7e1afe4edf4bb66844f785f578fa",
+                "t_data.ctab:md5,e16f5fa9c599ddd46861b17cc0655cd5",
+                "e2t.ctab:md5,c76a3f5e18ad925437ccdfd30687a3a6",
+                "e_data.ctab:md5,7350d819de3b8992a250a126ee4658a5",
+                "i2t.ctab:md5,fa6933716b2dff2c89374e882fc84de2",
+                "i_data.ctab:md5,cf2506824949c02e0bfde17a9ed86e61",
+                "t_data.ctab:md5,f6cdc7a1dd6fd3d4be624f01554b799d",
+                "e2t.ctab:md5,c76a3f5e18ad925437ccdfd30687a3a6",
+                "e_data.ctab:md5,8e767962070538206966b7a9da25affa",
+                "i2t.ctab:md5,fa6933716b2dff2c89374e882fc84de2",
+                "i_data.ctab:md5,a41bef50930529bd91972a6037f45d89",
+                "t_data.ctab:md5,30f876920455cd0a918dc57d4f5f5c1b",
+                "e2t.ctab:md5,c76a3f5e18ad925437ccdfd30687a3a6",
+                "e_data.ctab:md5,bd4c2ab193c407c24ee597e690262ec9",
+                "i2t.ctab:md5,fa6933716b2dff2c89374e882fc84de2",
+                "i_data.ctab:md5,4b516b81645380b515d8eb376432caf6",
+                "t_data.ctab:md5,2e2f08d2aea0a9e8f7c62ab9e4dfa5cb",
+                "gene_tpm.tsv:md5,a8d29e1664ca190ef0f39a13024b3daa"
             ]
         ],
-        "timestamp": "2026-10-06T14:19:41.130108539",
+        "timestamp": "2026-10-07T10:20:33.007046582",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

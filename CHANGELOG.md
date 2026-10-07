@@ -14,7 +14,8 @@ Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https:
 - [#3](https://github.com/SaveTheWhaIes/cwbd-project/pull/3) Reference parameters `--fasta`, `--gtf` and `--hisat2_index`.
 - [#4](https://github.com/SaveTheWhaIes/cwbd-project/pull/4) ALIGN subworkflow: HISAT2 alignment (index built from `--fasta`/`--gtf` unless `--hisat2_index` is given), coordinate sorting and indexing with SAMtools.
 - [#3](https://github.com/SaveTheWhaIes/cwbd-project/pull/3) Test profile on the nf-core/rnaseq yeast test data (GSE110004) and nf-test snapshot of the test run.
-- MARKDUP subworkflow: Picard MarkDuplicates flags duplicate reads and reports duplication metrics to MultiQC.
+- [#5] (https://github.com/SaveTheWhaIes/cwbd-project/pull/5) MARKDUP subworkflow: Picard MarkDuplicates flags duplicate reads and reports duplication metrics to MultiQC.
+- QUANTIFY subworkflow: gene level TPM per sample with StringTie (`-e`, strandedness from the samplesheet), merged into one genes x samples table by the local module MERGE_TPM.
 
 ### `Fixed`
 
@@ -22,13 +23,15 @@ Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https:
 
 ### `Dependencies`
 
-| Dependency | Old version | New version |
-| ---------- | ----------- | ----------- |
-| `fastqc`   |             | 0.12.1      |
-| `fastp`    |             | 1.3.6       |
-| `hisat2`   |             | 2.2.3       |
-| `samtools` |             | 1.24        |
-| `picard`   |             | 3.5.0       |
-| `multiqc`  |             | 1.35        |
+| Dependency  | Old version | New version |
+| ----------- | ----------- | ----------- |
+| `fastqc`    |             | 0.12.1      |
+| `fastp`     |             | 1.3.6       |
+| `hisat2`    |             | 2.2.3       |
+| `samtools`  |             | 1.24        |
+| `picard`    |             | 3.5.0       |
+| `multiqc`   |             | 1.35        |
+| `stringtie` |             | 3.0.3       |
+| `python`    |             | 3.14.5      |
 
 ### `Deprecated`
