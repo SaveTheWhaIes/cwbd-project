@@ -45,7 +45,7 @@ workflow CWBDPROJECT {
     def ch_hisat2_index = []
     if (params.hisat2_index) {
         def hisat2_index = file(params.hisat2_index, checkIfExists: true)
-        if (hisat2_index.name.endsWith('.tar.gz')) {
+        if (hisat2_index.name.endsWith('.tar.gz')) { // index can be folder or tar.gz 
             UNTAR(channel.value([ [id: 'genome'], hisat2_index ]))
             ch_hisat2_index = UNTAR.out.untar
         } else {
