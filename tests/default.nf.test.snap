@@ -35,7 +35,7 @@
                     "stringtie": "3.0.3"
                 },
                 "Workflow": {
-                    "SaveTheWhaIes/cwbd-project": "v1.0.0dev"
+                    "SaveTheWhaIes/cwbd-project": "v1.0.0"
                 }
             },
             [
@@ -339,9 +339,9 @@
                 "gene_tpm.tsv:md5,a8d29e1664ca190ef0f39a13024b3daa"
             ]
         ],
-        "timestamp": "2026-10-07T10:20:33.007046582",
+        "timestamp": "2026-10-07T21:36:52.976364595",
         "meta": {
-            "nf-test": "0.9.5",
+            "nf-test": "0.9.4",
             "nextflow": "26.04.6"
         }
     }

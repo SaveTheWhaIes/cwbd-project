@@ -36,9 +36,9 @@ lint:
 template:
   org: SaveTheWhaIes
   name: cwbdproject
-  description: RNA-seq workflow, from reads to differential expression
+  description: RNA-seq workflow, from reads to gene level TPM
   author: Laurens Hahn, Miriam Beermann
-  version: 1.0.0dev
+  version: 1.0.0
   force: true
   outdir: /home/laurens/repositories/bioinfo/projects/cwbd-project
   skip_features:
