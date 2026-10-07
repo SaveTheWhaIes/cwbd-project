@@ -30,7 +30,9 @@
 4. Alignment to the genome ([`HiSAT2`](https://ccb.jhu.edu/software/hisat2/index.shtml))
 5. Sort and index alignments ([`SAMtools`](https://sourceforge.net/projects/samtools/files/samtools/))
 6. Duplicate read marking ([`picard MarkDuplicates`](https://broadinstitute.github.io/picard/))
-7. Present QC for all steps ([`MultiQC`](http://multiqc.info/))
+7. Gene level quantification ([`StringTie`](https://ccb.jhu.edu/software/stringtie/))
+8. Merge the gene TPM values of all samples into one table (local Python script)
+9. Present QC for all steps ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
