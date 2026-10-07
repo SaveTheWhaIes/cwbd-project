@@ -1,0 +1,12 @@
+Sample	cat	fastp	fastqc	hisat2	samtools	python	picard	stringtie	untar	SaveTheWhaIes/cwbd-project	Nextflow
+CAT_FASTQ	9.5										
+FastQC			0.12.1								
+HISAT2_ALIGN				2.2.3	1.24						
+HISAT2_EXTRACTSPLICESITES				2.2.3	1.24						
+MERGE_TPM						3.14.5					
+PICARD_MARKDUPLICATES							3.5.0				
+SAMTOOLS_SORT					1.24						
+STRINGTIE_STRINGTIE								3.0.3			
+UNTAR									1.34		
+Workflow										v1.0.0dev	26.04.6
+fastp		1.3.6									

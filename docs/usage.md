@@ -4,7 +4,13 @@
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+The pipeline takes short read RNA-seq data (single or paired end) and returns a table with the TPM of every annotated gene in every sample, together with QC reports for each step. To run it you need three things:
+
+1. a samplesheet that lists the FASTQ files and the strandedness of each sample (`--input`)
+2. the genome FASTA and the matching gene annotation GTF (`--fasta`, `--gtf`)
+3. optionally a prebuilt HISAT2 index for that genome (`--hisat2_index`)
+
+For a mammalian genome the third point is not really optional, see [Reference genome](#reference-genome).
 
 ## Samplesheet input
 
@@ -25,9 +31,11 @@ CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz,r
 CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz,reverse
 ```
 
+All runs of one sample are concatenated into a single file per read direction, so they have to be of the same type. The pipeline stops with an error if the runs of a sample mix single and paired end data, or if they have different strandedness.
+
 ### Full samplesheet
 
-The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet. The samplesheet can have as many columns as you desire, however, there is a strict requirement for the first 4 columns to match those defined in the table below.
+The pipeline will auto-detect whether a sample is single- or paired-end using the information provided in the samplesheet: if `fastq_2` is empty, the sample is single end. The column itself has to stay in the file, so single end rows have two commas in a row.
 
 A final samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 6 samples, where `TREATMENT_REP3` has been sequenced twice.
 
@@ -36,30 +44,100 @@ sample,fastq_1,fastq_2,strandedness
 CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz,reverse
 CONTROL_REP2,AEG588A2_S2_L002_R1_001.fastq.gz,AEG588A2_S2_L002_R2_001.fastq.gz,reverse
 CONTROL_REP3,AEG588A3_S3_L002_R1_001.fastq.gz,AEG588A3_S3_L002_R2_001.fastq.gz,reverse
-TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,reverse
-TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,reverse
-TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,reverse
-TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,reverse
+TREATMENT_REP1,AEG588A4_S4_L003_R1_001.fastq.gz,,reverse
+TREATMENT_REP2,AEG588A5_S5_L003_R1_001.fastq.gz,,reverse
+TREATMENT_REP3,AEG588A6_S6_L003_R1_001.fastq.gz,,reverse
+TREATMENT_REP3,AEG588A6_S6_L004_R1_001.fastq.gz,,reverse
 ```
 
 | Column         | Description                                                                                                                                                                                  |
 | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `sample`       | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. Spaces in sample names are automatically converted to underscores (`_`).       |
+| `sample`       | Custom sample name. This entry will be identical for multiple sequencing libraries/runs from the same sample. It cannot contain spaces.                                                      |
 | `fastq_1`      | Full path to FastQ file for Illumina short reads 1. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                                   |
-| `fastq_2`      | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz".                                                                   |
+| `fastq_2`      | Full path to FastQ file for Illumina short reads 2. File has to be gzipped and have the extension ".fastq.gz" or ".fq.gz". Leave empty for single end data.                                  |
 | `strandedness` | Library strandedness: `forward`, `reverse` or `unstranded`. Must be the same for all runs of a sample. Most current Illumina stranded kits (e.g. TruSeq Stranded, dUTP based) are `reverse`. |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
+
+### Finding out the strandedness
+
+The pipeline does not infer strandedness, it has to be given in the samplesheet. It decides which strand flags HISAT2 (`--rna-strandness`) and StringTie (`--rf` / `--fr`) get, so a wrong value does not crash the run but silently assigns reads to the wrong strand. Ways to find it:
+
+- the documentation of the library prep kit, or the methods section of the paper the data comes from
+- a quick [Salmon](https://salmon.readthedocs.io/) run with `--libType A` on a subset of reads: the `expected_format` in `lib_format_counts.json` is `ISR` for `reverse`, `ISF` for `forward` and `IU` for `unstranded` paired end data (`SR`, `SF`, `U` for single end)
+- the strandedness check of a previous nf-core/rnaseq run on the same data
+
+For the data we tested on (GSE223541, mouse dorsal root ganglia) Salmon reported `ISR`, so those samples are `reverse`.
+
+## Reference genome
+
+| Parameter        | Required | Description                                                                     |
+| ---------------- | -------- | ------------------------------------------------------------------------------- |
+| `--fasta`        | yes      | Genome sequence in FASTA format.                                                |
+| `--gtf`          | yes      | Gene annotation in GTF format. StringTie only quantifies the genes listed here. |
+| `--hisat2_index` | no       | Prebuilt HISAT2 index, either as a directory or as a `.tar.gz` archive of one.  |
+
+FASTA, GTF and index have to come from the same genome release and use the same chromosome names. A GTF from Ensembl (`1`, `2`, ...) does not match a FASTA from UCSC (`chr1`, `chr2`, ...): the alignment still runs, but no read overlaps a gene and every TPM is 0.
+
+If `--hisat2_index` is not given, the pipeline builds the index from `--fasta` and `--gtf`. That is fine for small genomes like the test data. For mouse or human it is not: building a splice aware HISAT2 index needs far more memory than aligning against it, and the pipeline then falls back to an index without splice sites. For those genomes, build the index once (or download one) and pass it with `--hisat2_index`. The directory has to contain the `*.ht2` files, their common prefix does not matter.
 
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run SaveTheWhaIes/cwbd-project --input ./samplesheet.csv --outdir ./results  -profile docker
+nextflow run SaveTheWhaIes/cwbd-project \
+    -profile docker \
+    --input ./samplesheet.csv \
+    --fasta ./reference/genome.fa \
+    --gtf ./reference/genes.gtf \
+    --hisat2_index ./reference/hisat2 \
+    --outdir ./results
 ```
 
-This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.
+This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles. The main result is `results/tpm/gene_tpm.tsv`, see the [output documentation](output.md) for all files.
+
+As an example, this is the run on two mouse samples of GSE223541 against GRCm39 (Ensembl release 116), on a machine with 12 CPUs and 15 GB of memory:
+
+```csv title="samplesheet.csv"
+sample,fastq_1,fastq_2,strandedness
+SNI_Oxy_H2,fastq/SRX19144486_SRR23195516_1.fastq.gz,fastq/SRX19144486_SRR23195516_2.fastq.gz,reverse
+Sham_Oxy_C3,fastq/SRX19144488_SRR23195511_1.fastq.gz,fastq/SRX19144488_SRR23195511_2.fastq.gz,reverse
+```
+
+```bash
+nextflow run SaveTheWhaIes/cwbd-project -r 1.0.0 \
+    -profile docker \
+    --input samplesheet.csv \
+    --fasta reference/Mus_musculus.GRCm39.dna.primary_assembly.fa \
+    --gtf reference/Mus_musculus.GRCm39.116.gtf \
+    --hisat2_index reference/hisat2 \
+    --outdir results
+```
+
+The FASTQ files were downloaded with [nf-core/fetchngs](https://nf-co.re/fetchngs) from the run accessions.
+
+### Test profiles
+
+Two test profiles run the whole pipeline on small public datasets, without any input of your own:
+
+```bash
+nextflow run SaveTheWhaIes/cwbd-project -profile test,docker --outdir results_test
+nextflow run SaveTheWhaIes/cwbd-project -profile test_human,docker --outdir results_test_human
+```
+
+| Profile      | Data                                                                                                      | What it covers                                                                                  |
+| ------------ | --------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `test`       | Yeast, GSE110004 from the nf-core/rnaseq test data. 4 samples, 6 runs, paired and single end, `reverse`.  | Concatenating runs, mixed single and paired end, building the HISAT2 index.                     |
+| `test_human` | Human, one paired end sample on a 40 kb piece of chromosome 22 (nf-core modules test data), `unstranded`. | A second organism with spliced genes, unstranded data, a TPM table with a single sample column. |
+
+The test data is only meant to check that the pipeline works, the expression values have no biological meaning. In `test_human`, for example, almost all reads fall into a single gene, so that gene gets nearly the whole 1,000,000 TPM.
+
+The same two cases plus a run with a prebuilt index (`--hisat2_index` as `.tar.gz`) are set up as [nf-test](https://www.nf-test.com) tests in `tests/`. They compare all outputs with stored snapshots:
+
+```bash
+nf-test test --profile +docker
+```
 
 Note that the pipeline will create the following files in your working directory:
 
@@ -86,9 +164,11 @@ nextflow run SaveTheWhaIes/cwbd-project -profile docker -params-file params.yaml
 with:
 
 ```yaml title="params.yaml"
-input: './samplesheet.csv'
-outdir: './results/'
-<...>
+input: "./samplesheet.csv"
+fasta: "./reference/genome.fa"
+gtf: "./reference/genes.gtf"
+hisat2_index: "./reference/hisat2"
+outdir: "./results/"
 ```
 
 You can also generate such `YAML`/`JSON` files via [nf-core/launch](https://nf-co.re/launch).
@@ -137,6 +217,9 @@ If `-profile` is not specified, the pipeline will run locally and expect all sof
 
 - `test`
   - A profile with a complete configuration for automated testing
+  - Includes links to test data so needs no other parameters
+- `test_human`
+  - A second test profile on human chromosome 22 data, see [Test profiles](#test-profiles)
   - Includes links to test data so needs no other parameters
 - `docker`
   - A generic configuration profile to be used with [Docker](https://docker.com/)

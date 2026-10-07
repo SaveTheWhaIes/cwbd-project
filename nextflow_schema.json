@@ -201,9 +201,9 @@
                 },
                 "hisat2_index": {
                     "type": "string",
-                    "format": "directory-path",
+                    "format": "path",
                     "exists": true,
-                    "description": "Path to a prebuilt HISAT2 index directory.",
+                    "description": "Path to a prebuilt HISAT2 index directory, or a .tar.gz archive of one",
                     "help_text": "If not given, the index is built from `--fasta` and `--gtf` during the run. Building an index for a mammalian genome needs far more memory than aligning against it, so reuse an existing index for real data.",
                     "fa_icon": "fas fa-bezier-curve"
                 }

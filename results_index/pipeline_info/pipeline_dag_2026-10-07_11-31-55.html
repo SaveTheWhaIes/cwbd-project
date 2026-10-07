@@ -1,0 +1,209 @@
+<!--
+  ~ Copyright 2013-2026, Seqera Labs
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<pre class="mermaid" style="text-align: center;">
+%%{
+  init: {
+    'theme': 'base',
+    'themeVariables': {
+      'primaryColor': '#B6ECE2',
+      'primaryTextColor': '#160F26',
+      'primaryBorderColor': '#065647',
+      'lineColor': '#545555',
+      'clusterBkg': '#BABCBD22',
+      'clusterBorder': '#DDDEDE',
+      'fontFamily': 'arial'
+    }
+  }
+}%%
+flowchart TB
+    subgraph " "
+    v0["channel.empty"]
+    v2["channel.fromList"]
+    v7["channel.empty"]
+    v8["channel.empty"]
+    v17["discard_trimmed_pass"]
+    v18["save_trimmed_fail"]
+    v19["save_merged"]
+    v30[" "]
+    v33[" "]
+    v37["channel.empty"]
+    v39["save_unaligned"]
+    v44[" "]
+    v45["index_format"]
+    v53[" "]
+    v61["mode"]
+    v62["annotation_gtf"]
+    v73[" "]
+    v83["channel.of"]
+    v88[" "]
+    v91[" "]
+    end
+    subgraph " "
+    v1["versions"]
+    v11[" "]
+    v14[" "]
+    v15[" "]
+    v21[" "]
+    v22[" "]
+    v23[" "]
+    v24[" "]
+    v25[" "]
+    v32[" "]
+    v35[" "]
+    v36[" "]
+    v38[" "]
+    v41[" "]
+    v42[" "]
+    v43[" "]
+    v47[" "]
+    v48["bai"]
+    v49[" "]
+    v50[" "]
+    v55[" "]
+    v56[" "]
+    v57["bai"]
+    v64[" "]
+    v65[" "]
+    v66[" "]
+    v67[" "]
+    v71[" "]
+    v72["tpm"]
+    v98[" "]
+    v99[" "]
+    v100[" "]
+    v103["multiqc_report"]
+    end
+    subgraph "SAVETHEWHAIES_CWBDPROJECT [SAVETHEWHAIES_CWBDPROJECT]"
+    subgraph "SAVETHEWHAIES_CWBDPROJECT:CWBDPROJECT [CWBDPROJECT]"
+    subgraph "SAVETHEWHAIES_CWBDPROJECT:CWBDPROJECT:QC_TRIM [QC_TRIM]"
+    v10(["CAT_FASTQ"])
+    v13(["FASTQC"])
+    v20(["FASTP"])
+    v9(( ))
+    v26(( ))
+    end
+    v31(["UNTAR"])
+    subgraph "SAVETHEWHAIES_CWBDPROJECT:CWBDPROJECT:ALIGN [ALIGN]"
+    v34(["HISAT2_EXTRACTSPLICESITES"])
+    v40(["HISAT2_ALIGN"])
+    v46(["SAMTOOLS_SORT"])
+    v51(( ))
+    end
+    subgraph "SAVETHEWHAIES_CWBDPROJECT:CWBDPROJECT:MARKDUP [MARKDUP]"
+    v54(["PICARD_MARKDUPLICATES"])
+    v58(( ))
+    end
+    subgraph "SAVETHEWHAIES_CWBDPROJECT:CWBDPROJECT:QUANTIFY [QUANTIFY]"
+    v63(["STRINGTIE_STRINGTIE"])
+    v70(["MERGE_TPM"])
+    v60(( ))
+    v68(( ))
+    end
+    v97(["MULTIQC"])
+    v29(( ))
+    v101(( ))
+    end
+    end
+    subgraph "PIPELINE_INITIALISATION [PIPELINE_INITIALISATION]"
+    v3(( ))
+    end
+    v0 --> v1
+    v2 --> v3
+    v7 --> v29
+    v8 --> v29
+    v9 --> v10
+    v10 --> v11
+    v10 --> v9
+    v9 --> v13
+    v13 --> v15
+    v13 --> v14
+    v13 --> v26
+    v17 --> v20
+    v18 --> v20
+    v19 --> v20
+    v9 --> v20
+    v20 --> v40
+    v20 --> v25
+    v20 --> v24
+    v20 --> v23
+    v20 --> v22
+    v20 --> v21
+    v20 --> v26
+    v30 --> v31
+    v31 --> v40
+    v31 --> v32
+    v33 --> v34
+    v34 --> v40
+    v34 --> v36
+    v34 --> v35
+    v37 --> v38
+    v39 --> v40
+    v40 --> v46
+    v40 --> v43
+    v40 --> v42
+    v40 --> v41
+    v40 --> v51
+    v44 --> v46
+    v45 --> v46
+    v46 --> v54
+    v46 --> v50
+    v46 --> v49
+    v46 --> v48
+    v46 --> v47
+    v53 --> v54
+    v54 --> v57
+    v54 --> v56
+    v54 --> v55
+    v54 --> v58
+    v54 --> v60
+    v61 --> v63
+    v62 --> v63
+    v60 --> v63
+    v63 --> v67
+    v63 --> v66
+    v63 --> v65
+    v63 --> v64
+    v63 --> v68
+    v68 --> v70
+    v70 --> v72
+    v70 --> v71
+    v73 --> v29
+    v83 --> v29
+    v88 --> v29
+    v91 --> v29
+    v29 --> v97
+    v97 --> v100
+    v97 --> v99
+    v97 --> v98
+    v97 --> v101
+    v101 --> v103
+    v3 --> v9
+    v26 --> v29
+    v51 --> v29
+    v58 --> v29
+
+</pre>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, maxTextSize: Number.MAX_SAFE_INTEGER, maxEdges: Number.MAX_SAFE_INTEGER });
+</script>
+</body>
+</html>

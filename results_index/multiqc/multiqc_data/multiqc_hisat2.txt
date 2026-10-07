@@ -1,0 +1,5 @@
+Sample	unpaired_total	unpaired_aligned_none	unpaired_aligned_one	unpaired_aligned_multi	overall_alignment_rate	paired_total	paired_aligned_none	paired_aligned_one	paired_aligned_multi	paired_aligned_discord_one
+RAP1_UNINDUCED_REP1	48911	6931	41353	627	85.83					
+RAP1_UNINDUCED_REP2	98060	13829	83018	1213	85.9					
+WT_REP1	39448	39448	0	0	79.34	95472	19724	74989	759	0
+WT_REP2	18886	18886	0	0	80.31	47961	9443	38122	396	0

@@ -1,0 +1,30 @@
+nextflow_pipeline {
+
+    name "Test pipeline with a prebuilt HISAT2 index"
+    script "../main.nf"
+    tag "pipeline"
+
+    test("-profile test, prebuilt index") {
+
+        when {
+            params {
+                outdir       = "$outputDir"
+                hisat2_index = 'https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/reference/hisat2.tar.gz'
+            }
+        }
+
+        then {
+            def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            assert workflow.success
+            assertAll(
+                { assert workflow.trace.succeeded().count { task -> task.name.contains('HISAT2_BUILD') } == 0 },
+                { assert snapshot(
+                    removeNextflowVersion("$outputDir/pipeline_info/cwbdproject_software_mqc_versions.yml"),
+                    stable_path,
+                    stable_content
+                ).match() }
+            )
+        }
+    }
+}

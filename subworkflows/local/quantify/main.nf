@@ -1,3 +1,8 @@
+// SUBWORKFLOW: QUANTIFY
+// expression per gene ans sample TPM
+// first per sample with StringTie, then merge all samples into one table
+
+// import modules
 include { STRINGTIE_STRINGTIE } from '../../../modules/nf-core/stringtie/stringtie/main'
 include { MERGE_TPM           } from '../../../modules/local/merge_tpm/main'
 
@@ -8,22 +13,21 @@ workflow QUANTIFY {
     gtf    // path: gene annotation GTF
 
     main:
-    // -e: only estimate the abundance of annotated transcripts, no novel assembly.
-    // The module also takes a long read BAM, which we do not have: []
+    // quantifies the expression per gene and sample, using the BAM and GTF
     STRINGTIE_STRINGTIE(
         ch_bam.map { meta, bam -> [ meta, bam, [] ] },
         'expression-estimation',
         gtf
     )
 
-    // One table for all samples: wait for every sample, sorted by file name
-    // so the column order is the same in every run
+    // merges the per sample expression into one table with TPM values
     MERGE_TPM(
         STRINGTIE_STRINGTIE.out.abundance
             .map { _meta, abundance -> abundance }
             .toSortedList { a, b -> a.name <=> b.name }
     )
 
+    // emit the outputs
     emit:
     abundance = STRINGTIE_STRINGTIE.out.abundance // channel: [ val(meta), path(gene abundance) ]
     tpm       = MERGE_TPM.out.tpm                 // channel: path(gene_tpm.tsv)

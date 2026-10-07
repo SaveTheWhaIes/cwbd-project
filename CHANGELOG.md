@@ -16,7 +16,8 @@ Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https:
 - [#3](https://github.com/SaveTheWhaIes/cwbd-project/pull/3) Test profile on the nf-core/rnaseq yeast test data (GSE110004) and nf-test snapshot of the test run.
 - [#5] (https://github.com/SaveTheWhaIes/cwbd-project/pull/5) MARKDUP subworkflow: Picard MarkDuplicates flags duplicate reads and reports duplication metrics to MultiQC.
 - [#6] (https://github.com/SaveTheWhaIes/cwbd-project/pull/6) QUANTIFY subworkflow: gene level TPM per sample with StringTie (`-e`, strandedness from the samplesheet), merged into one genes x samples table by the local module MERGE_TPM.
-- Human chromosome 22 test.
+- [#7] (https://github.com/SaveTheWhaIes/cwbd-project/pull/7) Human chromosome 22 test.
+- [#8] (https://github.com/SaveTheWhaIes/cwbd-project/pull/8) HISAT2 index input and test.
 
 ### `Fixed`
 
