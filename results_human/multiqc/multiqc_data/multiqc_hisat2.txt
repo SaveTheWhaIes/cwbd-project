@@ -1,0 +1,2 @@
+Sample	paired_total	paired_aligned_none	paired_aligned_one	paired_aligned_multi	paired_aligned_discord_one	unpaired_total	unpaired_aligned_none	unpaired_aligned_one	unpaired_aligned_multi	overall_alignment_rate
+HUMAN_CHR22	4147	3634	513	0	0	7268	7268	0	0	12.37

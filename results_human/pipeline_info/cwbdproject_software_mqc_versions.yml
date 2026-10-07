@@ -1,0 +1,23 @@
+FASTP:
+  fastp: 1.3.6
+FASTQC:
+  fastqc: 0.12.1
+HISAT2_ALIGN:
+  hisat2: 2.2.3
+  samtools: 1.24
+HISAT2_BUILD:
+  hisat2: 2.2.3
+HISAT2_EXTRACTSPLICESITES:
+  hisat2: 2.2.3
+  samtools: 1.24
+MERGE_TPM:
+  python: 3.14.5
+PICARD_MARKDUPLICATES:
+  picard: 3.5.0
+SAMTOOLS_SORT:
+  samtools: 1.24
+STRINGTIE_STRINGTIE:
+  stringtie: 3.0.3
+Workflow:
+  SaveTheWhaIes/cwbd-project: v1.0.0dev
+  Nextflow: 26.04.6

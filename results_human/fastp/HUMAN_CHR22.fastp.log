@@ -1,0 +1,52 @@
+Detecting adapter sequence for read1...
+No adapter detected for read1
+
+Detecting adapter sequence for read2...
+No adapter detected for read2
+
+Read1 before filtering:
+total reads: 4159
+total bases: 590573
+Q20 bases: 581452(98.4556%)
+Q30 bases: 566575(95.9365%)
+Q40 bases: 488960(82.7942%)
+
+Read2 before filtering:
+total reads: 4159
+total bases: 602064
+Q20 bases: 590786(98.1268%)
+Q30 bases: 570687(94.7884%)
+Q40 bases: 456717(75.8585%)
+
+Read1 after filtering:
+total reads: 4147
+total bases: 588763
+Q20 bases: 580202(98.5459%)
+Q30 bases: 565693(96.0816%)
+Q40 bases: 488590(82.9859%)
+
+Read2 after filtering:
+total reads: 4147
+total bases: 600146
+Q20 bases: 589218(98.1791%)
+Q30 bases: 569368(94.8716%)
+Q40 bases: 455819(75.9514%)
+
+Filtering result:
+reads passed filter: 8294
+reads failed due to low quality: 22
+reads failed due to too many N: 2
+reads failed due to too short: 0
+reads failed due to adapter dimer: 0
+reads with adapter trimmed: 14
+bases trimmed due to adapters: 111
+
+Duplication rate: 24.3328%
+
+Insert size peak (evaluated by paired-end reads): 158
+
+JSON report: HUMAN_CHR22.fastp.json
+HTML report: HUMAN_CHR22.fastp.html
+
+fastp --in1 HUMAN_CHR22_R1.fastq.gz --in2 HUMAN_CHR22_R2.fastq.gz --out1 HUMAN_CHR22_R1.fastp.fastq.gz --out2 HUMAN_CHR22_R2.fastp.fastq.gz --json HUMAN_CHR22.fastp.json --html HUMAN_CHR22.fastp.html --thread 6 --detect_adapter_for_pe --qualified_quality_phred 20 --length_required 36
+fastp v1.3.6, time used: 0 seconds

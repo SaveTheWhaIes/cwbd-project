@@ -1,0 +1,34 @@
+# stringtie -o HUMAN_CHR22.transcripts.gtf -e -G genome.gtf -A HUMAN_CHR22.gene.abundance.txt -C HUMAN_CHR22.coverage.gtf -b HUMAN_CHR22.ballgown -p 6 HUMAN_CHR22.markdup.sorted.bam -v
+# StringTie version 3.0.3
+chr22	havana	transcript	9051	10576	.	-	.	gene_id "ENSG00000239435"; transcript_id "ENST00000472972"; ref_gene_name "KCNMB3P1"; cov "0.0"; FPKM "0.000000"; TPM "0.000000";
+chr22	havana	exon	9051	9261	.	-	.	gene_id "ENSG00000239435"; transcript_id "ENST00000472972"; exon_number "1"; ref_gene_name "KCNMB3P1"; cov "0.0";
+chr22	havana	exon	10481	10576	.	-	.	gene_id "ENSG00000239435"; transcript_id "ENST00000472972"; exon_number "2"; ref_gene_name "KCNMB3P1"; cov "0.0";
+chr22	StringTie	transcript	3337	10681	1000	-	.	gene_id "ENSG00000239435"; transcript_id "ENST00000493696"; ref_gene_name "KCNMB3P1"; cov "1.004426"; FPKM "240754.074784"; TPM "999999.915981";
+chr22	StringTie	exon	3337	6047	1000	-	.	gene_id "ENSG00000239435"; transcript_id "ENST00000493696"; exon_number "1"; ref_gene_name "KCNMB3P1"; cov "1.255625";
+chr22	StringTie	exon	8785	9261	1000	-	.	gene_id "ENSG00000239435"; transcript_id "ENST00000493696"; exon_number "2"; ref_gene_name "KCNMB3P1"; cov "0.000000";
+chr22	StringTie	exon	10481	10681	1000	-	.	gene_id "ENSG00000239435"; transcript_id "ENST00000493696"; exon_number "3"; ref_gene_name "KCNMB3P1"; cov "0.000000";
+chr22	havana	transcript	1	2611	.	+	.	gene_id "ENSG00000233995"; transcript_id "ENST00000454360"; gene_name "AP000547.1"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana	exon	1	124	.	+	.	gene_id "ENSG00000233995"; transcript_id "ENST00000454360"; exon_number "1"; gene_name "AP000547.1"; cov "0.0";
+chr22	havana	exon	682	727	.	+	.	gene_id "ENSG00000233995"; transcript_id "ENST00000454360"; exon_number "2"; gene_name "AP000547.1"; cov "0.0";
+chr22	havana	exon	1018	1186	.	+	.	gene_id "ENSG00000233995"; transcript_id "ENST00000454360"; exon_number "3"; gene_name "AP000547.1"; cov "0.0";
+chr22	havana	exon	1396	1501	.	+	.	gene_id "ENSG00000233995"; transcript_id "ENST00000454360"; exon_number "4"; gene_name "AP000547.1"; cov "0.0";
+chr22	havana	exon	2440	2611	.	+	.	gene_id "ENSG00000233995"; transcript_id "ENST00000454360"; exon_number "5"; gene_name "AP000547.1"; cov "0.0";
+chr22	ensembl_havana	transcript	18725	20784	.	-	.	gene_id "ENSG00000198445"; transcript_id "ENST00000359963"; gene_name "CCT8L2"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	ensembl_havana	exon	18725	20784	.	-	.	gene_id "ENSG00000198445"; transcript_id "ENST00000359963"; exon_number "1"; gene_name "CCT8L2"; cov "0.0";
+chr22	havana_tagene	transcript	20869	28084	.	+	.	gene_id "ENSG00000287285"; transcript_id "ENST00000656324"; gene_name "AP000547.4"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana_tagene	exon	20869	20949	.	+	.	gene_id "ENSG00000287285"; transcript_id "ENST00000656324"; exon_number "1"; gene_name "AP000547.4"; cov "0.0";
+chr22	havana_tagene	exon	27394	28084	.	+	.	gene_id "ENSG00000287285"; transcript_id "ENST00000656324"; exon_number "2"; gene_name "AP000547.4"; cov "0.0";
+chr22	havana	transcript	23063	23459	.	-	.	gene_id "ENSG00000240122"; transcript_id "ENST00000430910"; gene_name "FABP5P11"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana	exon	23063	23459	.	-	.	gene_id "ENSG00000240122"; transcript_id "ENST00000430910"; exon_number "1"; gene_name "FABP5P11"; cov "0.0";
+chr22	havana	transcript	29861	30189	.	+	.	gene_id "ENSG00000100181"; transcript_id "ENST00000558085"; gene_name "TPTEP1"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana	exon	29861	30189	.	+	.	gene_id "ENSG00000100181"; transcript_id "ENST00000558085"; exon_number "1"; gene_name "TPTEP1"; cov "0.0";
+chr22	havana	transcript	29885	30189	.	+	.	gene_id "ENSG00000100181"; transcript_id "ENST00000400593"; gene_name "TPTEP1"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana	exon	29885	30189	.	+	.	gene_id "ENSG00000100181"; transcript_id "ENST00000400593"; exon_number "1"; gene_name "TPTEP1"; cov "0.0";
+chr22	havana	transcript	29885	30189	.	+	.	gene_id "ENSG00000283633"; transcript_id "ENST00000592918"; gene_name "AP000547.3"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana	exon	29885	30189	.	+	.	gene_id "ENSG00000283633"; transcript_id "ENST00000592918"; exon_number "1"; gene_name "AP000547.3"; cov "0.0";
+chr22	havana	transcript	29922	30189	.	+	.	gene_id "ENSG00000283633"; transcript_id "ENST00000592107"; gene_name "AP000547.3"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana	exon	29922	30189	.	+	.	gene_id "ENSG00000283633"; transcript_id "ENST00000592107"; exon_number "1"; gene_name "AP000547.3"; cov "0.0";
+chr22	havana	transcript	30018	30189	.	+	.	gene_id "ENSG00000100181"; transcript_id "ENST00000426585"; gene_name "TPTEP1"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana	exon	30018	30189	.	+	.	gene_id "ENSG00000100181"; transcript_id "ENST00000426585"; exon_number "1"; gene_name "TPTEP1"; cov "0.0";
+chr22	havana	transcript	30024	30189	.	+	.	gene_id "ENSG00000283633"; transcript_id "ENST00000591299"; gene_name "AP000547.3"; cov "0.0"; FPKM "0.0"; TPM "0.0";
+chr22	havana	exon	30024	30189	.	+	.	gene_id "ENSG00000283633"; transcript_id "ENST00000591299"; exon_number "1"; gene_name "AP000547.3"; cov "0.0";
