@@ -18,6 +18,8 @@ Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https:
 - [#6] (https://github.com/SaveTheWhaIes/cwbd-project/pull/6) QUANTIFY subworkflow: gene level TPM per sample with StringTie (`-e`, strandedness from the samplesheet), merged into one genes x samples table by the local module MERGE_TPM.
 - [#7] (https://github.com/SaveTheWhaIes/cwbd-project/pull/7) Human chromosome 22 test.
 - [#8] (https://github.com/SaveTheWhaIes/cwbd-project/pull/8) HISAT2 index input and test.
+- [#9] (https://github.com/SaveTheWhaIes/cwbd-project/pull/9) Add annotations, comments and update docs.
+- [#10] (https://github.com/SaveTheWhaIes/cwbd-project/pull/9) Add nf-metro map
 
 ### `Fixed`
 
