@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## v1.0.0dev - [unreleased<!-- TODO nf-core: replace with date on release -->]
+## v1.0.0 - [2026-10-07]
 
 Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https://nf-co.re/) template.
 
@@ -24,7 +24,7 @@ Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https:
 ### `Fixed`
 
 - [#1](https://github.com/SaveTheWhaIes/cwbd-project/pull/1) Repository name `cwbd-project` used throughout the template, default branch `main`.
-- [#11](https://github.com/SaveTheWhaIes/cwbd-project/pull/11) hopefully fixed results ignoring.
+- [#11](https://github.com/SaveTheWhaIes/cwbd-project/pull/11) hopefully fixed results ignoring + moved MERGE_TPM environment.yml.
 
 ### `Dependencies`
 
@@ -38,5 +38,4 @@ Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https:
 | `multiqc`   |             | 1.35        |
 | `stringtie` |             | 3.0.3       |
 | `python`    |             | 3.14.5      |
-
-### `Deprecated`
+| `tar`       |             | 1.34        |
