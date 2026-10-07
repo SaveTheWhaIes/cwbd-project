@@ -1,2 +1,0 @@
-Sample	Unique Pairs	Duplicate Pairs Nonoptical
-HUMAN_CHR22	782.0	244.0

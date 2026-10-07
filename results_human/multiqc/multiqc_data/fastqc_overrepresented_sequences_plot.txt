@@ -1,3 +1,0 @@
-Sample	Top overrepresented sequence	Sum of remaining overrepresented sequences
-HUMAN_CHR22_1	3.8951671074777594	67.22769896609762
-HUMAN_CHR22_2	4.544361625390718	63.693195479682615

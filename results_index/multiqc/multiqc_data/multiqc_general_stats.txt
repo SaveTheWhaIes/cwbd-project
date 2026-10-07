@@ -1,9 +1,0 @@
-Sample	picard_mark_duplicates-PERCENT_DUPLICATION	hisat2-overall_alignment_rate	fastp-pct_duplication	fastp-after_filtering_q30_rate	fastp-after_filtering_q30_bases	fastp-filtering_result_passed_filter_reads	fastp-after_filtering_gc_content	fastp-pct_surviving_reads	fastp-pct_surviving_bases	fastp-pct_adapter	fastp-before_filtering_read1_mean_length	fastqc-percent_duplicates	fastqc-percent_gc	fastqc-avg_sequence_length	fastqc-median_sequence_length	fastqc-percent_fails	fastqc-total_sequences	fastp-before_filtering_read2_mean_length
-RAP1_UNINDUCED_REP1	74.9	85.83	53.626	93.5656	4.5625789999999995	0.048910999999999996	40.4344	97.822	96.56122772277229	7.696	101.0	65.292	40.0	101.0	101	20.0	0.049999999999999996	
-RAP1_UNINDUCED_REP2	81.3085	85.9	61.333000000000006	93.7731	9.176287	0.09806	40.4734	98.06	96.88737623762376	7.431	101.0	72.74	40.0	101.0	101	20.0	0.09999999999999999	
-WT_REP1	20.4467	79.34	12.307	93.7618	17.857284	0.190944	40.092299999999994	95.47200000000001	94.28398514851484	9.1775	101.0							101.0
-WT_REP1_1												75.072	40.0	101.0	101	20.0	0.09999999999999999	
-WT_REP1_2												74.463	40.0	101.0	101	20.0	0.09999999999999999	
-WT_REP2	12.760299999999999	80.31	7.41	94.7262	9.054993999999999	0.095922	40.3832	95.922	94.64480198019803	9.885	101.0							101.0
-WT_REP2_1												67.856	40.0	101.0	101	20.0	0.049999999999999996	
-WT_REP2_2												66.176	40.0	101.0	101	20.0	0.049999999999999996	

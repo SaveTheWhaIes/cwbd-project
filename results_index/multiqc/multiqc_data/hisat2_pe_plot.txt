@@ -1,3 +1,0 @@
-Sample	PE mapped uniquely	PE multimapped	PE neither mate aligned
-WT_REP1	74989.0	759.0	19724.0
-WT_REP2	38122.0	396.0	9443.0

@@ -1,5 +1,0 @@
-Sample	Unique Pairs	Unique Unpaired	Duplicate Pairs Nonoptical	Duplicate Unpaired
-RAP1_UNINDUCED_REP1	0.0	10537.0	0.0	31443.0
-RAP1_UNINDUCED_REP2	0.0	15744.0	0.0	68487.0
-WT_REP1	120520.0	0.0	30976.0	0.0
-WT_REP2	67206.0	0.0	9830.0	0.0

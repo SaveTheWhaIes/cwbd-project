@@ -1,2 +1,0 @@
-Sample	Passed Filter	Low Quality	Too Many N	Low Complexity	Too Short	Too Long
-HUMAN_CHR22	8294.0	22.0	2.0	nan	0.0	0.0
