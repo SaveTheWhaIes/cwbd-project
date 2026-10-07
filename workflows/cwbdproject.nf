@@ -3,8 +3,12 @@
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-include { FASTQC                 } from '../modules/nf-core/fastqc/main'
+include { QC_TRIM                } from '../subworkflows/local/qc_trim/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+include { ALIGN                  } from '../subworkflows/local/align/main'
+include { MARKDUP                } from '../subworkflows/local/markdup/main'
+include { QUANTIFY               } from '../subworkflows/local/quantify/main'
+include { UNTAR                  } from '../modules/nf-core/untar/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -30,10 +34,46 @@ workflow CWBDPROJECT {
     def ch_versions = channel.empty()
     def ch_multiqc_files = channel.empty()
     //
-    // MODULE: Run FastQC
+    // SUBWORKFLOW: Read QC and adapter/quality trimming
     //
-    FASTQC(ch_samplesheet)
-    ch_multiqc_files = ch_multiqc_files.mix(FASTQC.out.zip.map{ _meta, file -> file })
+    QC_TRIM(ch_samplesheet)
+    ch_multiqc_files = ch_multiqc_files.mix(QC_TRIM.out.multiqc_files)
+
+    //
+    // SUBWORKFLOW: Align trimmed reads with HISAT2, sort and index
+    //
+    def ch_hisat2_index = []
+    if (params.hisat2_index) {
+        def hisat2_index = file(params.hisat2_index, checkIfExists: true)
+        if (hisat2_index.name.endsWith('.tar.gz')) { // index can be folder or tar.gz 
+            UNTAR(channel.value([ [id: 'genome'], hisat2_index ]))
+            ch_hisat2_index = UNTAR.out.untar
+        } else {
+            ch_hisat2_index = channel.value([ [id: 'genome'], hisat2_index ])
+        }
+    }
+
+    ALIGN(
+        QC_TRIM.out.reads,
+        file(params.fasta, checkIfExists: true),
+        file(params.gtf, checkIfExists: true),
+        ch_hisat2_index
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(ALIGN.out.multiqc_files)
+
+    //
+    // SUBWORKFLOW: Mark PCR/optical duplicates (flagged, not removed)
+    //
+    MARKDUP(ALIGN.out.bam)
+    ch_multiqc_files = ch_multiqc_files.mix(MARKDUP.out.multiqc_files)
+
+    //
+    // SUBWORKFLOW: Gene level TPM per sample with StringTie, merged into one table
+    //
+    QUANTIFY(
+        MARKDUP.out.bam,
+        file(params.gtf, checkIfExists: true)
+    )
 
     //
     // Collate and save software versions

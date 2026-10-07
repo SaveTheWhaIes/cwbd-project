@@ -1,0 +1,31 @@
+nextflow_pipeline {
+
+    name "Test pipeline on human chr22"
+    script "../main.nf"
+    config "../conf/test_human.config"
+    tag "pipeline"
+
+    test("-profile test_human") {
+
+        when {
+            params {
+                outdir = "$outputDir"
+            }
+        }
+
+        then {
+            def stable_path = getAllFilesFromDir(params.outdir, relative: true, includeDir: true, ignore: ['pipeline_info/*.{html,json,txt}'])
+            def stable_content = getAllFilesFromDir(params.outdir, ignoreFile: 'tests/.nftignore')
+            def tpm_header = new File("$outputDir/tpm/gene_tpm.tsv").readLines()[0].split('\t') as List
+            assert workflow.success
+            assertAll(
+                { assert tpm_header == ['gene_id', 'gene_name', 'HUMAN_CHR22'] },
+                { assert snapshot(
+                    removeNextflowVersion("$outputDir/pipeline_info/cwbdproject_software_mqc_versions.yml"),
+                    stable_path,
+                    stable_content
+                ).match() }
+            )
+        }
+    }
+}

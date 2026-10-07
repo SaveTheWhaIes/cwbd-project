@@ -1,4 +1,4 @@
-# SaveTheWhaIes/cwbdproject: Output
+# SaveTheWhaIes/cwbd-project: Output
 
 ## Introduction
 
@@ -13,6 +13,11 @@ The directories listed below will be created in the results directory after the 
 The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes data using the following steps:
 
 - [FastQC](#fastqc) - Raw read QC
+- [fastp](#fastp) - Adapter and quality trimming
+- [HISAT2](#hisat2) - Alignment to the genome
+- [picard MarkDuplicates](#picard-markduplicates) - Duplicate read marking
+- [StringTie](#stringtie) - Gene level quantification
+- [TPM table](#tpm-table) - Gene TPM values of all samples in one table
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -27,7 +32,74 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 </details>
 
-[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/).
+[FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) gives general quality metrics about your sequenced reads. It provides information about the quality score distribution across your reads, per base sequence content (%A/T/G/C), adapter contamination and overrepresented sequences. For further reading and documentation see the [FastQC help pages](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/). Samples sequenced in several runs (more than one samplesheet row with the same `sample`) are merged first, so there is one FastQC report per sample and read direction.
+
+### fastp
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `fastp/`
+  - `*.fastp.html`: fastp report with read quality, adapter content and filtering statistics before and after trimming.
+  - `*.fastp.json`: the same statistics in machine readable form, parsed by MultiQC.
+  - `*.fastp.log`: fastp command line output.
+
+</details>
+
+[fastp](https://github.com/OpenGene/fastp) removes adapter sequences (detected automatically) and low quality bases from the reads. Bases below Phred 20 count as low quality, and reads shorter than 36 bp after trimming are discarded. The trimmed reads are not published by default; they are passed directly to the alignment step.
+
+### HISAT2
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `hisat2/log/`
+  - `*.log`: HISAT2 alignment report containing the mapping results summary.
+
+</details>
+
+[HISAT2](http://daehwankimlab.github.io/hisat2/) is a fast and sensitive alignment program for mapping next-generation sequencing reads (both DNA and RNA) to a population of human genomes as well as to a single reference genome. It introduced a new indexing scheme called a Hierarchical Graph FM index (HGFM) which when combined with several alignment strategies, enable rapid and accurate alignment of sequencing reads. The aligned reads are coordinate sorted and indexed with [SAMtools](https://sourceforge.net/projects/samtools/files/samtools/) and passed on to duplicate marking; they are not published separately.
+
+### picard MarkDuplicates
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `picard/`
+  - `<SAMPLE>.markdup.sorted.bam`: Coordinate sorted BAM file after duplicate marking. This is the final post-processed BAM file and so will be saved by default in the results directory.
+  - `<SAMPLE>.markdup.sorted.bai`: BAI index file for coordinate sorted BAM file after duplicate marking.
+  - `<SAMPLE>.markdup.sorted.metrics.txt`: Metrics file from MarkDuplicates.
+
+</details>
+
+Unless you are using [UMIs](https://emea.illumina.com/science/sequencing-method-explorer/kits-and-arrays/umi.html) it is not possible to establish whether the fragments you have sequenced from your sample were derived via true biological duplication (i.e. sequencing independent template fragments) or as a result of PCR biases introduced during the library preparation. The pipeline uses [picard MarkDuplicates](https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates) to _mark_ the duplicate reads identified amongst the alignments to allow you to gauge the overall level of duplication in your samples. However, for RNA-seq data it is not recommended to physically remove duplicate reads from the alignments (unless you are using UMIs) because you expect a significant level of true biological duplication that arises from the same fragments being sequenced from for example highly expressed genes.
+
+### StringTie
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `stringtie/`
+  - `*.coverage.gtf`: GTF file containing transcripts that are fully covered by reads.
+  - `*.transcripts.gtf`: GTF file containing all of the annotated transcripts with their estimated abundances.
+  - `*.gene.abundance.txt`: Text file containing gene abundances with coverage, FPKM and TPM values.
+- `stringtie/<SAMPLE>.ballgown/`: Ballgown output directory.
+
+</details>
+
+[StringTie](https://ccb.jhu.edu/software/stringtie/) is run with `-e`, so it only estimates the abundance of the transcripts in the `--gtf` annotation and does not assemble new ones. The library strandedness from the samplesheet is passed on (`--rf` for `reverse`, `--fr` for `forward`).
+
+### TPM table
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `tpm/`
+  - `gene_tpm.tsv`: tab separated table with one row per gene and one column per sample, holding the gene TPM values from StringTie. The first two columns are `gene_id` and `gene_name`.
+
+</details>
+
+The gene abundance tables of all samples are merged into one table by `bin/merge_tpm.py`. If StringTie reports a gene on more than one row, the TPM values of these rows are summed. Columns are sorted by sample name and rows by gene ID.
 
 ### MultiQC
 

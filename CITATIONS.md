@@ -1,4 +1,4 @@
-# SaveTheWhaIes/cwbdproject: Citations
+# SaveTheWhaIes/cwbd-project: Citations
 
 ## [nf-core](https://pubmed.ncbi.nlm.nih.gov/32055031/)
 
@@ -13,6 +13,26 @@
 - [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
 > Andrews, S. (2010). FastQC: A Quality Control Tool for High Throughput Sequence Data [Online].
+
+- [fastp](https://pubmed.ncbi.nlm.nih.gov/30423086/)
+
+> Chen S, Zhou Y, Chen Y, Gu J. fastp: an ultra-fast all-in-one FASTQ preprocessor. Bioinformatics. 2018 Sep 1;34(17):i884-i890. doi: 10.1093/bioinformatics/bty560. PubMed PMID: 30423086.
+
+- [HISAT2](https://pubmed.ncbi.nlm.nih.gov/31375807/)
+
+> Kim D, Paggi JM, Park C, Bennett C, Salzberg SL. Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype Graph-based genome alignment and genotyping with HISAT2 and HISAT-genotype. Nat Biotechnol. 2019 Aug;37(8):907-915. doi: 10.1038/s41587-019-0201-4. Epub 2019 Aug 2. PubMed PMID: 31375807.
+
+- [SAMtools](https://pubmed.ncbi.nlm.nih.gov/19505943/)
+
+> Li H, Handsaker B, Wysoker A, Fennell T, Ruan J, Homer N, Marth G, Abecasis G, Durbin R; 1000 Genome Project Data Processing Subgroup. The Sequence Alignment/Map format and SAMtools. Bioinformatics. 2009 Aug 15;25(16):2078-9. doi: 10.1093/bioinformatics/btp352. Epub 2009 Jun 8. PubMed PMID: 19505943; PubMed Central PMCID: PMC2723002.
+
+- [Picard](http://broadinstitute.github.io/picard)
+
+> Picard Toolkit. 2019. Broad Institute, GitHub Repository. https://broadinstitute.github.io/picard; Broad Institute
+
+- [StringTie2](https://pubmed.ncbi.nlm.nih.gov/31842956/)
+
+> Kovaka S, Zimin AV, Pertea GM, Razaghi R, Salzberg SL, Pertea M. Transcriptome assembly from long-read RNA-seq alignments with StringTie2 Genome Biol. 2019 Dec 16;20(1):278. doi: 10.1186/s13059-019-1910-1. PubMed PMID: 31842956; PubMed Central PMCID: PMC6912988.
 
 - [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
 

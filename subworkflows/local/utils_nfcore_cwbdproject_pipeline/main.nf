@@ -1,5 +1,5 @@
 //
-// Subworkflow with functionality specific to the SaveTheWhaIes/cwbdproject pipeline
+// Subworkflow with functionality specific to the SaveTheWhaIes/cwbd-project pipeline
 //
 
 /*
@@ -153,6 +153,12 @@ def validateInputSamplesheet(input) {
     def endedness_ok = metas.collect{ meta -> meta.single_end }.unique().size == 1
     if (!endedness_ok) {
         error("Please check input samplesheet -> Multiple runs of a sample must be of the same datatype i.e. single-end or paired-end: ${metas[0].id}")
+    }
+
+    // Check that multiple runs of the same sample have the same strandedness
+    def strandedness_ok = metas.collect{ meta -> meta.strandedness }.unique().size == 1
+    if (!strandedness_ok) {
+        error("Please check input samplesheet -> Multiple runs of a sample must have the same strandedness: ${metas[0].id}")
     }
 
     return [ metas[0], fastqs ]

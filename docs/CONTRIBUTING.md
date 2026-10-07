@@ -3,15 +3,15 @@ title: Contributing
 markdownPlugin: checklist
 ---
 
-# `SaveTheWhaIes/cwbdproject`: Contributing guidelines
+# `SaveTheWhaIes/cwbd-project`: Contributing guidelines
 
 Hi there!
-Thanks for taking an interest in improving SaveTheWhaIes/cwbdproject.
+Thanks for taking an interest in improving SaveTheWhaIes/cwbd-project.
 
-This page describes the recommended nf-core way to contribute to both SaveTheWhaIes/cwbdproject and nf-core pipelines in general, including:
+This page describes the recommended nf-core way to contribute to both SaveTheWhaIes/cwbd-project and nf-core pipelines in general, including:
 
 - [General contribution guidelines](#general-contribution-guidelines): common procedures or guides across all nf-core pipelines.
-- [Pipeline-specific contribution guidelines](#pipeline-specific-contribution-guidelines): procedures or guides specific to the development conventions of SaveTheWhaIes/cwbdproject.
+- [Pipeline-specific contribution guidelines](#pipeline-specific-contribution-guidelines): procedures or guides specific to the development conventions of SaveTheWhaIes/cwbd-project.
 
 ## General contribution guidelines
 
@@ -20,8 +20,8 @@ This page describes the recommended nf-core way to contribute to both SaveTheWha
 To contribute code to any nf-core pipeline:
 
 - [ ] Ensure you have Nextflow, nf-core tools, and nf-test installed. See the [nf-core/tools repository](https://github.com/nf-core/tools) for instructions.
-- [ ] Check whether a GitHub [issue](https://github.com/SaveTheWhaIes/cwbdproject/issues) about your idea already exists. If an issue does not exist, create one so that others are aware you are working on it.
-- [ ] [Fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) the [SaveTheWhaIes/cwbdproject repository](https://github.com/SaveTheWhaIes/cwbdproject) to your GitHub account.
+- [ ] Check whether a GitHub [issue](https://github.com/SaveTheWhaIes/cwbd-project/issues) about your idea already exists. If an issue does not exist, create one so that others are aware you are working on it.
+- [ ] [Fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) the [SaveTheWhaIes/cwbd-project repository](https://github.com/SaveTheWhaIes/cwbd-project) to your GitHub account.
 - [ ] Create a branch on your forked repository and make your changes following [pipeline conventions](#pipeline-contribution-conventions) (if applicable).
 - [ ] To fix major bugs, name your branch `patch` and follow the [patch release](#patch-release) process.
 - [ ] Update relevant documentation within the `docs/` folder, use nf-core/tools to update `nextflow_schema.json`, and update `CITATIONS.md`.
@@ -82,7 +82,7 @@ These tests are run with the latest available version of Nextflow and the minimu
 
 ### Pipeline contribution conventions
 
-nf-core semi-standardises how you write code and other contributions to make the SaveTheWhaIes/cwbdproject code and processing logic more understandable for new contributors and to ensure quality.
+nf-core semi-standardises how you write code and other contributions to make the SaveTheWhaIes/cwbd-project code and processing logic more understandable for new contributors and to ensure quality.
 
 #### Add a new pipeline step
 

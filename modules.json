@@ -1,18 +1,63 @@
 {
-    "name": "SaveTheWhaIes/cwbdproject",
-    "homePage": "https://github.com/SaveTheWhaIes/cwbdproject",
+    "name": "SaveTheWhaIes/cwbd-project",
+    "homePage": "https://github.com/SaveTheWhaIes/cwbd-project",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "cat/fastq": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
+                        "installed_by": ["modules"]
+                    },
+                    "fastp": {
+                        "branch": "master",
+                        "git_sha": "826a9b28d6da61097d60e1923bb8a2e51de3c5b4",
+                        "installed_by": ["modules"]
+                    },
                     "fastqc": {
                         "branch": "master",
                         "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     },
+                    "hisat2/align": {
+                        "branch": "master",
+                        "git_sha": "7ff2dbaefb93fdd3825b7bff1d86d2f3c7e946f5",
+                        "installed_by": ["modules"]
+                    },
+                    "hisat2/build": {
+                        "branch": "master",
+                        "git_sha": "7ff2dbaefb93fdd3825b7bff1d86d2f3c7e946f5",
+                        "installed_by": ["modules"]
+                    },
+                    "hisat2/extractsplicesites": {
+                        "branch": "master",
+                        "git_sha": "22b467cf44542d7e16b1410c5dbd5982c9545f27",
+                        "installed_by": ["modules"]
+                    },
                     "multiqc": {
                         "branch": "master",
                         "git_sha": "98403d15b0e50edae1f3fec5eae5e24982f1fade",
+                        "installed_by": ["modules"]
+                    },
+                    "picard/markduplicates": {
+                        "branch": "master",
+                        "git_sha": "fe08122c3dc2f2d7890daba06f6c90e570ef01de",
+                        "installed_by": ["modules"]
+                    },
+                    "samtools/sort": {
+                        "branch": "master",
+                        "git_sha": "9339809fcb90af8a8b7051e6cd914894d5c52002",
+                        "installed_by": ["modules"]
+                    },
+                    "stringtie/stringtie": {
+                        "branch": "master",
+                        "git_sha": "3608e17edf8ad0a09b5eede8ef486729de703c28",
+                        "installed_by": ["modules"]
+                    },
+                    "untar": {
+                        "branch": "master",
+                        "git_sha": "6d46786420b4d7bc88eba026eb389c0c5535d120",
                         "installed_by": ["modules"]
                     }
                 }

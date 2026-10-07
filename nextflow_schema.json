@@ -1,8 +1,8 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/SaveTheWhaIes/cwbdproject/master/nextflow_schema.json",
-    "title": "SaveTheWhaIes/cwbdproject pipeline parameters",
-    "description": "RNA-seq workflow, from reads to differential expression",
+    "$id": "https://raw.githubusercontent.com/SaveTheWhaIes/cwbd-project/main/nextflow_schema.json",
+    "title": "SaveTheWhaIes/cwbd-project pipeline parameters",
+    "description": "RNA-seq workflow, from reads to gene level TPM",
     "type": "object",
     "$defs": {
         "input_output_options": {
@@ -171,11 +171,51 @@
                     "description": "Display hidden parameters in the help message (only works when --help or --help_full are provided)."
                 }
             }
+        },
+        "reference_genome_options": {
+            "title": "Reference genome options",
+            "type": "object",
+            "fa_icon": "fas fa-dna",
+            "description": "Reference genome and annotation used for alignment and quantification.",
+            "required": ["fasta", "gtf"],
+            "properties": {
+                "fasta": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "pattern": "^\\S+\\.fn?a(sta)?(\\.gz)?$",
+                    "description": "Path to the genome FASTA file.",
+                    "help_text": "Used to build the HISAT2 index when `--hisat2_index` is not given.",
+                    "fa_icon": "far fa-file-code"
+                },
+                "gtf": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "mimetype": "text/plain",
+                    "pattern": "^\\S+\\.gtf(\\.gz)?$",
+                    "description": "Path to the gene annotation in GTF format.",
+                    "help_text": "Provides the splice sites and exons for the HISAT2 index and the genes StringTie quantifies. Must match the genome FASTA (same assembly and chromosome names).",
+                    "fa_icon": "fas fa-code-branch"
+                },
+                "hisat2_index": {
+                    "type": "string",
+                    "format": "path",
+                    "exists": true,
+                    "description": "Path to a prebuilt HISAT2 index directory, or a .tar.gz archive of one",
+                    "help_text": "If not given, the index is built from `--fasta` and `--gtf` during the run. Building an index for a mammalian genome needs far more memory than aligning against it, so reuse an existing index for real data.",
+                    "fa_icon": "fas fa-bezier-curve"
+                }
+            }
         }
     },
     "allOf": [
         {
             "$ref": "#/$defs/input_output_options"
+        },
+        {
+            "$ref": "#/$defs/reference_genome_options"
         },
         {
             "$ref": "#/$defs/institutional_config_options"

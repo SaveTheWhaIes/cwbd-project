@@ -2,6 +2,6 @@ contact_links:
   - name: Join nf-core
     url: https://nf-co.re/join
     about: Please join the nf-core community here
-  - name: "Slack #cwbdproject channel"
-    url: https://nfcore.slack.com/channels/cwbdproject
-    about: Discussion about the SaveTheWhaIes/cwbdproject pipeline
+  - name: "Slack #cwbd-project channel"
+    url: https://nfcore.slack.com/channels/cwbd-project
+    about: Discussion about the SaveTheWhaIes/cwbd-project pipeline

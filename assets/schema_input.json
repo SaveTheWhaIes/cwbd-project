@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/SaveTheWhaIes/cwbdproject/master/assets/schema_input.json",
-    "title": "SaveTheWhaIes/cwbdproject pipeline - params.input schema",
+    "$id": "https://raw.githubusercontent.com/SaveTheWhaIes/cwbd-project/main/assets/schema_input.json",
+    "title": "SaveTheWhaIes/cwbd-project pipeline - params.input schema",
     "description": "Schema for the file provided with params.input",
     "type": "array",
     "items": {
@@ -26,8 +26,14 @@
                 "exists": true,
                 "pattern": "^([\\S\\s]*\\/)?[^\\s\\/]+\\.f(ast)?q\\.gz$",
                 "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+            },
+            "strandedness": {
+                "type": "string",
+                "enum": ["unstranded", "forward", "reverse"],
+                "errorMessage": "Strandedness must be one of 'unstranded', 'forward' or 'reverse'",
+                "meta": ["strandedness"]
             }
         },
-        "required": ["sample", "fastq_1"]
+        "required": ["sample", "fastq_1", "strandedness"]
     }
 }
