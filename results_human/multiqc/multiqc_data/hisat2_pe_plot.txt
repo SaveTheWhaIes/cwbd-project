@@ -1,0 +1,2 @@
+Sample	PE mapped uniquely	PE neither mate aligned
+HUMAN_CHR22	513.0	3634.0
