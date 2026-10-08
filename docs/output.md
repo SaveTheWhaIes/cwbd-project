@@ -18,6 +18,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [picard MarkDuplicates](#picard-markduplicates) - Duplicate read marking
 - [StringTie](#stringtie) - Gene level quantification
 - [TPM table](#tpm-table) - Gene TPM values of all samples in one table
+- [featureCounts](#featurecounts) - Gene level read counts
+- [Count table](#count-table) - Gene read counts of all samples in one table
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -100,6 +102,27 @@ Unless you are using [UMIs](https://emea.illumina.com/science/sequencing-method-
 </details>
 
 The gene abundance tables of all samples are merged into one table by `bin/merge_tpm.py`. If StringTie reports a gene on more than one row, the TPM values of these rows are summed. Columns are sorted by sample name and rows by gene ID.
+
+### featureCounts
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `featurecounts/`
+  - `*.featureCounts.tsv`: read counts per gene for one sample, with the gene coordinates, length and name.
+  - `*.featureCounts.tsv.summary`: number of read pairs that were assigned to a gene and why the others were not.
+
+</details>
+
+[featureCounts](https://subread.sourceforge.net/) counts the reads on the exons of each gene in the `--gtf` annotation (`-t exon -g gene_id`). For paired end data it counts fragments, not single reads (`--countReadPairs`). The library strandedness from the samplesheet is passed on (`-s 2` for `reverse`, `-s 1` for `forward`). Reads that map to several places or overlap more than one gene are not counted, and duplicates are counted. The summary is shown in the MultiQC report.
+
+### Count table
+
+<details markdown
+<summary>Output files</summary>  
+- `counts/`                                                        - `gene_counts.h one row per gene and one column per sample, holding the read counts from          featureCounts. Th_id` and`gene_name`.  
+</details>  
+The featureCounts tables of all samples are merged into one table by `bin/merrted by samplename and rows by gene ID. Unlike the TPM table, these raw counts can be used as inon tools likeDESeq2.
 
 ### MultiQC
 

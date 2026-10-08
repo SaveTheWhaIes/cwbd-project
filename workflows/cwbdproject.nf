@@ -45,7 +45,7 @@ workflow CWBDPROJECT {
     def ch_hisat2_index = []
     if (params.hisat2_index) {
         def hisat2_index = file(params.hisat2_index, checkIfExists: true)
-        if (hisat2_index.name.endsWith('.tar.gz')) { // index can be folder or tar.gz 
+        if (hisat2_index.name.endsWith('.tar.gz')) { // index can be folder or tar.gz
             UNTAR(channel.value([ [id: 'genome'], hisat2_index ]))
             ch_hisat2_index = UNTAR.out.untar
         } else {
@@ -68,12 +68,13 @@ workflow CWBDPROJECT {
     ch_multiqc_files = ch_multiqc_files.mix(MARKDUP.out.multiqc_files)
 
     //
-    // SUBWORKFLOW: Gene level TPM per sample with StringTie, merged into one table
+    // SUBWORKFLOW: Gene level TPM per sample with StringTie and read counts with featureCounts, each merged into one table
     //
     QUANTIFY(
         MARKDUP.out.bam,
         file(params.gtf, checkIfExists: true)
     )
+    ch_multiqc_files = ch_multiqc_files.mix(QUANTIFY.out.multiqc_files)
 
     //
     // Collate and save software versions

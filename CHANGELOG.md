@@ -3,13 +3,19 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-### `Added
+## v1.0.1dev - [unreleased]
+
+### `Added`
 
 - [#17](https://github.com/SaveTheWhaIes/cwbd-project/pull/17) added animated metro map.
+- [#19](https://github.com/SaveTheWhaIes/cwbd-project/pull/19) Gene level read counts with featureCounts, merged into one genes x samples table by the local module MERGE_COUNTS, featureCounts summary in MultiQC.
+- [#19](https://github.com/SaveTheWhaIes/cwbd-project/pull/19) Metro map v4: TPM and read counts in one Quantification section, QC line replaced by stations on the main route as in nf-core/rnaseq.
 
 ### `Fixed`
 
 - [#16](https://github.com/SaveTheWhaIes/cwbd-project/pull/16) Metro map rewritten by hand from `docs/images/metro.mmd`.
+- [#19](https://github.com/SaveTheWhaIes/cwbd-project/pull/19) Trailing whitespace and prettier formatting, so the pre-commit lint passes again.
+- [#19](https://github.com/SaveTheWhaIes/cwbd-project/pull/19) MultiQC merges the FastQC rows of read 1 and read 2 into the sample row of the General Statistics table.
 
 ## v1.0.0 - [2026-10-07]
 

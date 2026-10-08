@@ -13,11 +13,11 @@
 
 ## Introduction
 
-**SaveTheWhaIes/cwbd-project** is a Nextflow pipeline for bulk RNA-seq. It takes short reads (single or paired end) together with a genome and its gene annotation, aligns the reads splice aware, marks duplicates and quantifies the expression of every annotated gene. The result is one table with the TPM of each gene in each sample, plus a MultiQC report that collects the QC of all steps.
+**SaveTheWhaIes/cwbd-project** is a Nextflow pipeline for bulk RNA-seq. It takes short reads (single or paired end) together with a genome and its gene annotation, aligns the reads splice aware, marks duplicates and quantifies the expression of every annotated gene. The result is one table with the TPM and one with the read counts of each gene in each sample, plus a MultiQC report that collects the QC of all steps.
 
 It was written as the project of the Computational Workflows for Biomedical Data course and is built on the [nf-core](https://nf-co.re) template.
 
-![SaveTheWhaIes/cwbd-project metro map](docs/images/cwbd_v3_animated.svg)
+![SaveTheWhaIes/cwbd-project metro map](docs/images/cwbd_v4_animated.svg)
 
 1. Merge re-sequenced FASTQ files of the same sample ([`cat`](https://www.gnu.org/software/coreutils/manual/html_node/cat-invocation.html))
 2. Raw read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
@@ -27,7 +27,9 @@ It was written as the project of the Computational Workflows for Biomedical Data
 6. Duplicate read marking, without removing them ([`Picard MarkDuplicates`](https://broadinstitute.github.io/picard/))
 7. Gene level quantification of the annotated transcripts ([`StringTie`](https://ccb.jhu.edu/software/stringtie/))
 8. Merge the gene TPM values of all samples into one table (`bin/merge_tpm.py`)
-9. Present QC for all steps ([`MultiQC`](http://multiqc.info/))
+9. Gene level read counts ([`featureCounts`](https://subread.sourceforge.net/))
+10. Merge the gene counts of all samples into one table (`bin/merge_counts.py`)
+11. Present QC for all steps ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 
@@ -71,7 +73,7 @@ For more details, see the [usage documentation](docs/usage.md).
 
 ## Pipeline output
 
-The main result is `<OUTDIR>/tpm/gene_tpm.tsv` with one row per gene and one TPM column per sample. Next to it the pipeline writes the FastQC and fastp reports, the HISAT2 alignment logs, the duplicate marked BAM files with their Picard metrics, the per sample StringTie output and the MultiQC report. All files are described in the [output documentation](docs/output.md).
+The main result is `<OUTDIR>/tpm/gene_tpm.tsv` with one row per gene and one TPM column per sample, and <OUTDIR>/counts/gene_counts.tsv with the read counts in the same layout. Next to them the pipeline writes the FastQC and fastp reports, the HISAT2 alignment logs, the duplicate marked BAM files with their Picard metrics, the per sample StringTie and featureCounts output and the MultiQC report. All files are described in the [output documentation](docs/output.md).
 
 ## Credits
 
