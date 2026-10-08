@@ -52,8 +52,10 @@ graph LR
         %%metro direction: TB
         infer_experiment([RSeQC infer experiment])
         read_distribution([RSeQC read distribution])
+        biotype([featureCounts biotype])
 
         infer_experiment -->|light,full,prebuilt| read_distribution
+        read_distribution -->|light,full,prebuilt| biotype
     end
 
     subgraph quantify [Quantification]
@@ -81,6 +83,6 @@ graph LR
     fastp -->|light,full,prebuilt| extractsplicesites
     samtools_sort -->|light,full,prebuilt| picard
     picard -->|light,full,prebuilt| infer_experiment
-    read_distribution -->|light,full,prebuilt| featurecounts
-    read_distribution -->|light,full,prebuilt| stringtie
+    biotype -->|light,full,prebuilt| featurecounts
+    biotype -->|light,full,prebuilt| stringtie
     merge_counts -->|light,full,prebuilt| multiqc

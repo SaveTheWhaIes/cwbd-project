@@ -1,11 +1,14 @@
 // SUBWORKFLOW: ALIGNMENT_QC
 // checks the library strandedness and where the reads fall on the genes with RSeQC
 // both tools need the gene models as BED12, made from the GTF
+// counts the reads per gene biotype with featureCounts for MultiQC
 
 // import modules
-include { EAUTILS_GTF2BED        } from '../../../modules/nf-core/ea-utils/gtf2bed/main'
-include { RSEQC_INFEREXPERIMENT  } from '../../../modules/nf-core/rseqc/inferexperiment/main'
-include { RSEQC_READDISTRIBUTION } from '../../../modules/nf-core/rseqc/readdistribution/main'
+include { EAUTILS_GTF2BED                                        } from '../../../modules/nf-core/ea-utils/gtf2bed/main'
+include { RSEQC_INFEREXPERIMENT                                  } from '../../../modules/nf-core/rseqc/inferexperiment/main'
+include { RSEQC_READDISTRIBUTION                                 } from '../../../modules/nf-core/rseqc/readdistribution/main'
+include { SUBREAD_FEATURECOUNTS as SUBREAD_FEATURECOUNTS_BIOTYPE } from '../../../modules/nf-core/subread/featurecounts/main'
+include { CUSTOM_MULTIQCCUSTOMBIOTYPE                            } from '../../../modules/nf-core/custom/multiqccustombiotype/main'
 
 // reads the forward and reverse fractions from infer_experiment
 // returns forward, reverse or unstranded with the thresholds of nf-core/rnaseq
@@ -34,9 +37,10 @@ def inferStrandedness(Path txt) {
 workflow ALIGNMENT_QC {
 
     take:
-    ch_bam // channel: [ val(meta), path(bam) ], coordinate sorted, duplicates marked
-    ch_bai // channel: [ val(meta), path(bai) ]
-    gtf    // path: gene annotation GTF
+    ch_bam          // channel: [ val(meta), path(bam) ], coordinate sorted, duplicates marked
+    ch_bai          // channel: [ val(meta), path(bai) ]
+    gtf             // path: gene annotation GTF
+    biotypes_header // path: MultiQC header for the biotype plot
 
     main:
     // converts the GTF into a BED12 file with one line per transcript
@@ -60,14 +64,28 @@ workflow ALIGNMENT_QC {
     // reads on exons, introns and intergenic regions
     RSEQC_READDISTRIBUTION(ch_bam_bai, ch_bed)
 
-    // MultiQC parses both reports, without the meta map
+    // reads per gene biotype (protein_coding, rRNA, misc_RNA, ...)
+    SUBREAD_FEATURECOUNTS_BIOTYPE(
+        ch_bam.map { meta, bam -> [ meta, bam, gtf ] }
+    )
+
+    // turns the biotype counts into a MultiQC bar plot and the rRNA share
+    CUSTOM_MULTIQCCUSTOMBIOTYPE(
+        SUBREAD_FEATURECOUNTS_BIOTYPE.out.counts,
+        [ [:], biotypes_header ]
+    )
+
+    // MultiQC parses all reports, without the meta map
     def ch_multiqc_files = RSEQC_INFEREXPERIMENT.out.txt
         .mix(RSEQC_READDISTRIBUTION.out.txt)
+        .mix(CUSTOM_MULTIQCCUSTOMBIOTYPE.out.tsv)
+        .mix(CUSTOM_MULTIQCCUSTOMBIOTYPE.out.rrna)
         .map { _meta, txt -> txt }
 
     // emit the outputs
     emit:
-    infer_experiment  = RSEQC_INFEREXPERIMENT.out.txt  // channel: [ val(meta), path(txt) ]
-    read_distribution = RSEQC_READDISTRIBUTION.out.txt // channel: [ val(meta), path(txt) ]
-    multiqc_files     = ch_multiqc_files               // channel: [ path ]
+    infer_experiment  = RSEQC_INFEREXPERIMENT.out.txt            // channel: [ val(meta), path(txt) ]
+    read_distribution = RSEQC_READDISTRIBUTION.out.txt           // channel: [ val(meta), path(txt) ]
+    biotype_counts    = SUBREAD_FEATURECOUNTS_BIOTYPE.out.counts // channel: [ val(meta), path(tsv) ]
+    multiqc_files     = ch_multiqc_files                         // channel: [ path ]
 }

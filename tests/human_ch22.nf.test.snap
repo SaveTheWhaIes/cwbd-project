@@ -2,6 +2,9 @@
     "-profile test_human": {
         "content": [
             {
+                "CUSTOM_MULTIQCCUSTOMBIOTYPE": {
+                    "python": "3.12.12"
+                },
                 "EAUTILS_GTF2BED": {
                     "perl": "5.26.2"
                 },
@@ -46,6 +49,9 @@
                 "SUBREAD_FEATURECOUNTS": {
                     "subread": "2.1.1"
                 },
+                "SUBREAD_FEATURECOUNTS_BIOTYPE": {
+                    "subread": "2.1.1"
+                },
                 "Workflow": {
                     "SaveTheWhaIes/cwbd-project": "v1.0.0"
                 }
@@ -65,6 +71,11 @@
                 "featurecounts",
                 "featurecounts/HUMAN_CHR22.featureCounts.tsv",
                 "featurecounts/HUMAN_CHR22.featureCounts.tsv.summary",
+                "featurecounts/biotype",
+                "featurecounts/biotype/HUMAN_CHR22.biotype.featureCounts.tsv",
+                "featurecounts/biotype/HUMAN_CHR22.biotype.featureCounts.tsv.summary",
+                "featurecounts/biotype/HUMAN_CHR22.biotype_counts_mqc.tsv",
+                "featurecounts/biotype/HUMAN_CHR22.biotype_counts_rrna_mqc.tsv",
                 "hisat2",
                 "hisat2/log",
                 "hisat2/log/HUMAN_CHR22.hisat2.summary.log",
@@ -262,6 +273,10 @@
                 "gene_counts.tsv:md5,1924edcac5cfa12d0f52070379495d16",
                 "HUMAN_CHR22.featureCounts.tsv:md5,1380ffe2a65040e465ac62ccaaaefda6",
                 "HUMAN_CHR22.featureCounts.tsv.summary:md5,8101b4bfefbfc285cdeb04c89431543d",
+                "HUMAN_CHR22.biotype.featureCounts.tsv:md5,da53f68b3b1d7839820b2b31b4894a5d",
+                "HUMAN_CHR22.biotype.featureCounts.tsv.summary:md5,8101b4bfefbfc285cdeb04c89431543d",
+                "HUMAN_CHR22.biotype_counts_mqc.tsv:md5,3e4f3c5bf230f0fefd4ed8fb4089d1be",
+                "HUMAN_CHR22.biotype_counts_rrna_mqc.tsv:md5,5d5e83410d8021556b8ace4646b963c9",
                 "HUMAN_CHR22.hisat2.summary.log:md5,0a85bb7ccc47304922904d01c85b5508",
                 "fastp-insert-size-plot.txt:md5,98fa40a4982dfa9f2d465a6d9cc9fe38",
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,39015a56a3244f5df6a5b31e8a407c46",
@@ -314,7 +329,7 @@
                 "gene_tpm.tsv:md5,892f656a27a33a507cde405a811f0999"
             ]
         ],
-        "timestamp": "2026-10-08T14:35:46.580463608",
+        "timestamp": "2026-10-08T20:49:18.090360955",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

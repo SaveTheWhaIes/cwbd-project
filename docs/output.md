@@ -17,6 +17,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [HISAT2](#hisat2) - Alignment to the genome
 - [picard MarkDuplicates](#picard-markduplicates) - Duplicate read marking
 - [RSeQC](#rseqc) - Strandedness check and read distribution
+- [Biotype counts](#biotype-counts) - Reads per gene biotype
 - [StringTie](#stringtie) - Gene level quantification
 - [TPM table](#tpm-table) - Gene TPM values of all samples in one table
 - [featureCounts](#featurecounts) - Gene level read counts
@@ -104,6 +105,20 @@ Unless you are using [UMIs](https://emea.illumina.com/science/sequencing-method-
 </details>
 
 [RSeQC](https://rseqc.sourceforge.net/) checks the aligned reads against the gene models of the `--gtf`, converted to BED12 first. `infer_experiment.py` compares each read with the strand of the gene it overlaps. If 80 % or more of the assigned reads fit one direction the library is called `forward` or `reverse`, if both directions are within 10 % of each other it is `unstranded` (the thresholds of nf-core/rnaseq). When this differs from the samplesheet, the pipeline prints a warning but keeps running. `read_distribution.py` shows how many reads fall on exons versus introns and intergenic regions; a high intron share points to unspliced pre-mRNA or genomic DNA. Both reports are shown in the MultiQC report.
+
+### Biotype counts
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `featurecounts/biotype/`
+  - `*.biotype.featureCounts.tsv`: reads per gene biotype for one sample.
+  - `*.biotype_counts_mqc.tsv`: the same counts as a MultiQC bar plot.
+  - `*.biotype_counts_rrna_mqc.tsv`: share of reads on rRNA genes, for the General Statistics table.
+
+</details>
+
+featureCounts counts the reads per `gene_biotype` of the `--gtf` (`-g gene_biotype`), the same way as the gene counts (exons, read pairs, strandedness from the samplesheet). The plot shows how much of a library is mRNA (`protein_coding`) and how much falls on non-coding RNA such as `rRNA`, `misc_RNA` (for example the 7SL RNAs Rn7s1 and Rn7s2) or `lncRNA`. The GTF needs the `gene_biotype` attribute, as Ensembl GTFs have; GENCODE GTFs call it `gene_type` and are not supported.
 
 ### TPM table
 
