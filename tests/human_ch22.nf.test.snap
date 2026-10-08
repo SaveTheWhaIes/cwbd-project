@@ -2,6 +2,9 @@
     "-profile test_human": {
         "content": [
             {
+                "EAUTILS_GTF2BED": {
+                    "perl": "5.26.2"
+                },
                 "FASTP": {
                     "fastp": "1.3.6"
                 },
@@ -27,6 +30,12 @@
                 },
                 "PICARD_MARKDUPLICATES": {
                     "picard": "3.5.0"
+                },
+                "RSEQC_INFEREXPERIMENT": {
+                    "rseqc": "5.0.4"
+                },
+                "RSEQC_READDISTRIBUTION": {
+                    "rseqc": "5.0.4"
                 },
                 "SAMTOOLS_SORT": {
                     "samtools": 1.24
@@ -100,6 +109,8 @@
                 "multiqc/multiqc_data/multiqc_general_stats.txt",
                 "multiqc/multiqc_data/multiqc_hisat2.txt",
                 "multiqc/multiqc_data/multiqc_picard_dups.txt",
+                "multiqc/multiqc_data/multiqc_rseqc_infer_experiment.txt",
+                "multiqc/multiqc_data/multiqc_rseqc_read_distribution.txt",
                 "multiqc/multiqc_data/multiqc_software_versions.txt",
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_data/picard_MarkIlluminaAdapters_histogram.txt",
@@ -107,6 +118,8 @@
                 "multiqc/multiqc_data/picard_MeanQualityByCycle_histogram_1.txt",
                 "multiqc/multiqc_data/picard_QualityScoreDistribution_histogram.txt",
                 "multiqc/multiqc_data/picard_deduplication.txt",
+                "multiqc/multiqc_data/rseqc_infer_experiment_plot.txt",
+                "multiqc/multiqc_data/rseqc_read_distribution_plot.txt",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/pdf",
                 "multiqc/multiqc_plots/pdf/fastp-insert-size-plot.pdf",
@@ -143,6 +156,9 @@
                 "multiqc/multiqc_plots/pdf/hisat2_pe_plot-pct.pdf",
                 "multiqc/multiqc_plots/pdf/picard_deduplication-cnt.pdf",
                 "multiqc/multiqc_plots/pdf/picard_deduplication-pct.pdf",
+                "multiqc/multiqc_plots/pdf/rseqc_infer_experiment_plot.pdf",
+                "multiqc/multiqc_plots/pdf/rseqc_read_distribution_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/rseqc_read_distribution_plot-pct.pdf",
                 "multiqc/multiqc_plots/png",
                 "multiqc/multiqc_plots/png/fastp-insert-size-plot.png",
                 "multiqc/multiqc_plots/png/fastp-seq-content-gc-plot_Read_1_After_filtering.png",
@@ -178,6 +194,9 @@
                 "multiqc/multiqc_plots/png/hisat2_pe_plot-pct.png",
                 "multiqc/multiqc_plots/png/picard_deduplication-cnt.png",
                 "multiqc/multiqc_plots/png/picard_deduplication-pct.png",
+                "multiqc/multiqc_plots/png/rseqc_infer_experiment_plot.png",
+                "multiqc/multiqc_plots/png/rseqc_read_distribution_plot-cnt.png",
+                "multiqc/multiqc_plots/png/rseqc_read_distribution_plot-pct.png",
                 "multiqc/multiqc_plots/svg",
                 "multiqc/multiqc_plots/svg/fastp-insert-size-plot.svg",
                 "multiqc/multiqc_plots/svg/fastp-seq-content-gc-plot_Read_1_After_filtering.svg",
@@ -213,6 +232,9 @@
                 "multiqc/multiqc_plots/svg/hisat2_pe_plot-pct.svg",
                 "multiqc/multiqc_plots/svg/picard_deduplication-cnt.svg",
                 "multiqc/multiqc_plots/svg/picard_deduplication-pct.svg",
+                "multiqc/multiqc_plots/svg/rseqc_infer_experiment_plot.svg",
+                "multiqc/multiqc_plots/svg/rseqc_read_distribution_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/rseqc_read_distribution_plot-pct.svg",
                 "multiqc/multiqc_report.html",
                 "picard",
                 "picard/HUMAN_CHR22.markdup.sorted.bai",
@@ -220,6 +242,9 @@
                 "picard/HUMAN_CHR22.markdup.sorted.metrics.txt",
                 "pipeline_info",
                 "pipeline_info/cwbdproject_software_mqc_versions.yml",
+                "rseqc",
+                "rseqc/HUMAN_CHR22.infer_experiment.txt",
+                "rseqc/HUMAN_CHR22.read_distribution.txt",
                 "stringtie",
                 "stringtie/HUMAN_CHR22.ballgown",
                 "stringtie/HUMAN_CHR22.ballgown/e2t.ctab",
@@ -265,16 +290,22 @@
                 "fastqc_sequence_length_distribution_plot.txt:md5,211bf5f66682eb7d59b51b3793326a0b",
                 "featureCounts_assignment_plot.txt:md5,e651e88f98796f2537d16ba1a3badd7f",
                 "hisat2_pe_plot.txt:md5,de293e09b028238ffbaa8d4f5b68c4af",
-                "multiqc_citations.txt:md5,bb6775dc5b45797b4550290c588f0f97",
+                "multiqc_citations.txt:md5,eef23a84306f8b1b5d1d9997464cf79a",
                 "multiqc_fastqc.txt:md5,033ff3740200ffdf44e6e4d6d6e3bb5c",
                 "multiqc_featurecounts.txt:md5,c51ea198db29ae88757b7c4e28e5d13a",
                 "multiqc_hisat2.txt:md5,7c1a3b143af94774143e252d317bf843",
                 "multiqc_picard_dups.txt:md5,d0cdc230d3d905390c1c54a9548e1bae",
+                "multiqc_rseqc_infer_experiment.txt:md5,7eb2cadc763e74fd1f4bc75925d20745",
+                "multiqc_rseqc_read_distribution.txt:md5,112c0e015f5588ef3dfaef581a934d73",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_QualityScoreDistribution_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_deduplication.txt:md5,87305ab4da16773f870a0c1dc3d5e0ed",
+                "rseqc_infer_experiment_plot.txt:md5,ea84927d70d5f33957275536aad57882",
+                "rseqc_read_distribution_plot.txt:md5,b42e7bc9e47017a327a4b83567933e46",
+                "HUMAN_CHR22.infer_experiment.txt:md5,5128b1ad052c9d18d07c75c28b4bfc5f",
+                "HUMAN_CHR22.read_distribution.txt:md5,24e44be5beade0371c623270adbd3340",
                 "e2t.ctab:md5,9ae42e056c955a88a883e5e917840d77",
                 "e_data.ctab:md5,3ca8e89c3c76592f3ed7aeec443a55d3",
                 "i2t.ctab:md5,658131af118cfb416939044fdb5411de",
@@ -283,7 +314,7 @@
                 "gene_tpm.tsv:md5,892f656a27a33a507cde405a811f0999"
             ]
         ],
-        "timestamp": "2026-10-08T13:24:18.486556385",
+        "timestamp": "2026-10-08T14:35:46.580463608",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

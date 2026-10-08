@@ -8,6 +8,7 @@ include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { ALIGN                  } from '../subworkflows/local/align/main'
 include { MARKDUP                } from '../subworkflows/local/markdup/main'
 include { QUANTIFY               } from '../subworkflows/local/quantify/main'
+include { ALIGNMENT_QC           } from '../subworkflows/local/alignment_qc/main'
 include { UNTAR                  } from '../modules/nf-core/untar/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -66,6 +67,16 @@ workflow CWBDPROJECT {
     //
     MARKDUP(ALIGN.out.bam)
     ch_multiqc_files = ch_multiqc_files.mix(MARKDUP.out.multiqc_files)
+
+    //
+    // SUBWORKFLOW: Strandedness check and read distribution with RSeQC
+    //
+    ALIGNMENT_QC(
+        MARKDUP.out.bam,
+        MARKDUP.out.bai,
+        file(params.gtf, checkIfExists: true)
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(ALIGNMENT_QC.out.multiqc_files)
 
     //
     // SUBWORKFLOW: Gene level TPM per sample with StringTie and read counts with featureCounts, each merged into one table
