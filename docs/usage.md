@@ -61,7 +61,7 @@ An [example samplesheet](../assets/samplesheet.csv) has been provided with the p
 
 ### Finding out the strandedness
 
-The pipeline does not infer strandedness, it has to be given in the samplesheet. It decides which strand flags HISAT2 (`--rna-strandness`), StringTie (`--rf` / `--fr`) and featureCounts (-s) get, so a wrong value does not crash the run but silently assigns reads to the wrong strand. Ways to find it:
+The pipeline does not infer strandedness on its own, it has to be given in the samplesheet. After the alignment RSeQC checks it against the data and prints a warning when they do not match (see [output](output.md#rseqc)). It decides which strand flags HISAT2 (`--rna-strandness`), StringTie (`--rf` / `--fr`) and featureCounts (-s) get, so a wrong value does not crash the run but silently assigns reads to the wrong strand. Ways to find it:
 
 - the documentation of the library prep kit, or the methods section of the paper the data comes from
 - a quick [Salmon](https://salmon.readthedocs.io/) run with `--libType A` on a subset of reads: the `expected_format` in `lib_format_counts.json` is `ISR` for `reverse`, `ISF` for `forward` and `IU` for `unstranded` paired end data (`SR`, `SF`, `U` for single end)

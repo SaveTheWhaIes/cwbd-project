@@ -16,6 +16,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [fastp](#fastp) - Adapter and quality trimming
 - [HISAT2](#hisat2) - Alignment to the genome
 - [picard MarkDuplicates](#picard-markduplicates) - Duplicate read marking
+- [RSeQC](#rseqc) - Strandedness check and read distribution
 - [StringTie](#stringtie) - Gene level quantification
 - [TPM table](#tpm-table) - Gene TPM values of all samples in one table
 - [featureCounts](#featurecounts) - Gene level read counts
@@ -90,6 +91,19 @@ Unless you are using [UMIs](https://emea.illumina.com/science/sequencing-method-
 </details>
 
 [StringTie](https://ccb.jhu.edu/software/stringtie/) is run with `-e`, so it only estimates the abundance of the transcripts in the `--gtf` annotation and does not assemble new ones. The library strandedness from the samplesheet is passed on (`--rf` for `reverse`, `--fr` for `forward`).
+
+### RSeQC
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `rseqc/`
+  - `*.infer_experiment.txt`: fraction of reads that fit a forward, reverse or unstranded library.
+  - `*.read_distribution.txt`: number of reads on coding exons, UTRs, introns and the regions up and downstream of genes.
+
+</details>
+
+[RSeQC](https://rseqc.sourceforge.net/) checks the aligned reads against the gene models of the `--gtf`, converted to BED12 first. `infer_experiment.py` compares each read with the strand of the gene it overlaps. If 80 % or more of the assigned reads fit one direction the library is called `forward` or `reverse`, if both directions are within 10 % of each other it is `unstranded` (the thresholds of nf-core/rnaseq). When this differs from the samplesheet, the pipeline prints a warning but keeps running. `read_distribution.py` shows how many reads fall on exons versus introns and intergenic regions; a high intron share points to unspliced pre-mRNA or genomic DNA. Both reports are shown in the MultiQC report.
 
 ### TPM table
 
