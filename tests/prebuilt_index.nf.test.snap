@@ -5,6 +5,9 @@
                 "CAT_FASTQ": {
                     "cat": 9.5
                 },
+                "CUSTOM_MULTIQCCUSTOMBIOTYPE": {
+                    "python": "3.12.12"
+                },
                 "EAUTILS_GTF2BED": {
                     "perl": "5.26.2"
                 },
@@ -44,6 +47,9 @@
                     "stringtie": "3.0.3"
                 },
                 "SUBREAD_FEATURECOUNTS": {
+                    "subread": "2.1.1"
+                },
+                "SUBREAD_FEATURECOUNTS_BIOTYPE": {
                     "subread": "2.1.1"
                 },
                 "UNTAR": {
@@ -91,6 +97,23 @@
                 "featurecounts/WT_REP1.featureCounts.tsv.summary",
                 "featurecounts/WT_REP2.featureCounts.tsv",
                 "featurecounts/WT_REP2.featureCounts.tsv.summary",
+                "featurecounts/biotype",
+                "featurecounts/biotype/RAP1_UNINDUCED_REP1.biotype.featureCounts.tsv",
+                "featurecounts/biotype/RAP1_UNINDUCED_REP1.biotype.featureCounts.tsv.summary",
+                "featurecounts/biotype/RAP1_UNINDUCED_REP1.biotype_counts_mqc.tsv",
+                "featurecounts/biotype/RAP1_UNINDUCED_REP1.biotype_counts_rrna_mqc.tsv",
+                "featurecounts/biotype/RAP1_UNINDUCED_REP2.biotype.featureCounts.tsv",
+                "featurecounts/biotype/RAP1_UNINDUCED_REP2.biotype.featureCounts.tsv.summary",
+                "featurecounts/biotype/RAP1_UNINDUCED_REP2.biotype_counts_mqc.tsv",
+                "featurecounts/biotype/RAP1_UNINDUCED_REP2.biotype_counts_rrna_mqc.tsv",
+                "featurecounts/biotype/WT_REP1.biotype.featureCounts.tsv",
+                "featurecounts/biotype/WT_REP1.biotype.featureCounts.tsv.summary",
+                "featurecounts/biotype/WT_REP1.biotype_counts_mqc.tsv",
+                "featurecounts/biotype/WT_REP1.biotype_counts_rrna_mqc.tsv",
+                "featurecounts/biotype/WT_REP2.biotype.featureCounts.tsv",
+                "featurecounts/biotype/WT_REP2.biotype.featureCounts.tsv.summary",
+                "featurecounts/biotype/WT_REP2.biotype_counts_mqc.tsv",
+                "featurecounts/biotype/WT_REP2.biotype_counts_rrna_mqc.tsv",
                 "hisat2",
                 "hisat2/log",
                 "hisat2/log/RAP1_UNINDUCED_REP1.hisat2.summary.log",
@@ -342,6 +365,22 @@
                 "WT_REP1.featureCounts.tsv.summary:md5,23a761de5c4ab60d609ddbaf82575311",
                 "WT_REP2.featureCounts.tsv:md5,72bdf65f24763e5a6c6b1b32fb6ba0fc",
                 "WT_REP2.featureCounts.tsv.summary:md5,a3962cc2bdc8e1e30604313d01a3e7ce",
+                "RAP1_UNINDUCED_REP1.biotype.featureCounts.tsv:md5,e837b1a1289a7fb56873eb12fe818cd4",
+                "RAP1_UNINDUCED_REP1.biotype.featureCounts.tsv.summary:md5,491b5f7b09b118ed61bd5af2430910ad",
+                "RAP1_UNINDUCED_REP1.biotype_counts_mqc.tsv:md5,87e03846684bb041d2f9a581e6ce2912",
+                "RAP1_UNINDUCED_REP1.biotype_counts_rrna_mqc.tsv:md5,845ff9059c72bc6722a8de69776e22bb",
+                "RAP1_UNINDUCED_REP2.biotype.featureCounts.tsv:md5,007761d8d8da104b53f0b23ee2510b31",
+                "RAP1_UNINDUCED_REP2.biotype.featureCounts.tsv.summary:md5,035b4d41c7b818b8731113af1fe6feac",
+                "RAP1_UNINDUCED_REP2.biotype_counts_mqc.tsv:md5,29487a00c4adad4c378143dccacdd03c",
+                "RAP1_UNINDUCED_REP2.biotype_counts_rrna_mqc.tsv:md5,6d3fa4c88c7fe61f638e4624ad5e22f0",
+                "WT_REP1.biotype.featureCounts.tsv:md5,bfadb0225d41c7308bdbb8351a631a23",
+                "WT_REP1.biotype.featureCounts.tsv.summary:md5,dc2d853c04f9dfb836c6e76312d964a4",
+                "WT_REP1.biotype_counts_mqc.tsv:md5,53c0db01a4cfde6cc240fb4375fc2e4b",
+                "WT_REP1.biotype_counts_rrna_mqc.tsv:md5,8ef76d717492ca23764938aee8ea33a9",
+                "WT_REP2.biotype.featureCounts.tsv:md5,660ee4c7efb5c075c4a25a703f497ece",
+                "WT_REP2.biotype.featureCounts.tsv.summary:md5,2f75e26ebf769dc02b3581c02e293771",
+                "WT_REP2.biotype_counts_mqc.tsv:md5,ed8d5f0d2c3803c793e7800dc85a8761",
+                "WT_REP2.biotype_counts_rrna_mqc.tsv:md5,12294618fe44df1e7f39348372dcb481",
                 "RAP1_UNINDUCED_REP1.hisat2.summary.log:md5,46faca8ac38bd280ef891c82632b0693",
                 "RAP1_UNINDUCED_REP2.hisat2.summary.log:md5,99b53b87f4e248f383343b1b6503175e",
                 "WT_REP1.hisat2.summary.log:md5,9cc1777547e06b4ed52d9a975a50f0a0",
@@ -418,7 +457,7 @@
                 "gene_tpm.tsv:md5,a8d29e1664ca190ef0f39a13024b3daa"
             ]
         ],
-        "timestamp": "2026-10-08T14:36:43.597514168",
+        "timestamp": "2026-10-08T20:50:18.241626621",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

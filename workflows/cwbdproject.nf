@@ -70,12 +70,13 @@ workflow CWBDPROJECT {
     ch_multiqc_files = ch_multiqc_files.mix(MARKDUP.out.multiqc_files)
 
     //
-    // SUBWORKFLOW: Strandedness check and read distribution with RSeQC
+    // SUBWORKFLOW: Strandedness check and read distribution with RSeQC, reads per biotype with featureCounts
     //
     ALIGNMENT_QC(
         MARKDUP.out.bam,
         MARKDUP.out.bai,
-        file(params.gtf, checkIfExists: true)
+        file(params.gtf, checkIfExists: true),
+        file("${projectDir}/assets/biotypes_header.txt", checkIfExists: true)
     )
     ch_multiqc_files = ch_multiqc_files.mix(ALIGNMENT_QC.out.multiqc_files)
 

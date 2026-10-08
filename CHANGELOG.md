@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#20](https://github.com/SaveTheWhaIes/cwbd-project/pull/20) ALIGNMENT_QC subworkflow: RSeQC infer_experiment and read_distribution on the duplicate marked BAMs, warning when the samplesheet strandedness does not match the data, both reports in MultiQC.
 - [#20](https://github.com/SaveTheWhaIes/cwbd-project/pull/20) Metro map: one colour per way to run the pipeline (index built or prebuilt), wrapped into two rows after duplicate marking like nf-core/rnaseq, new Alignment QC section.
 - [#21](https://github.com/SaveTheWhaIes/cwbd-project/pull/21) Parameter `--hisat2_build_memory`: memory from which the built HISAT2 index gets splice sites and exons (full index), otherwise a light genome index; test for the full index; third line in the metro map.
+- [#22](https://github.com/SaveTheWhaIes/cwbd-project/pull/22) Biotype QC: featureCounts per gene biotype in ALIGNMENT_QC, bar plot and % rRNA in MultiQC, station in the metro map.
 
 ### `Fixed`
 
