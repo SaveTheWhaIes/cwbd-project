@@ -19,6 +19,9 @@
                     "hisat2": "2.2.3",
                     "samtools": 1.24
                 },
+                "MERGE_COUNTS": {
+                    "python": "3.14.5"
+                },
                 "MERGE_TPM": {
                     "python": "3.14.5"
                 },
@@ -31,6 +34,9 @@
                 "STRINGTIE_STRINGTIE": {
                     "stringtie": "3.0.3"
                 },
+                "SUBREAD_FEATURECOUNTS": {
+                    "subread": "2.1.1"
+                },
                 "UNTAR": {
                     "untar": 1.34
                 },
@@ -39,6 +45,8 @@
                 }
             },
             [
+                "counts",
+                "counts/gene_counts.tsv",
                 "fastp",
                 "fastp/RAP1_UNINDUCED_REP1.fastp.html",
                 "fastp/RAP1_UNINDUCED_REP1.fastp.json",
@@ -65,6 +73,15 @@
                 "fastqc/WT_REP2_1_fastqc.zip",
                 "fastqc/WT_REP2_2_fastqc.html",
                 "fastqc/WT_REP2_2_fastqc.zip",
+                "featurecounts",
+                "featurecounts/RAP1_UNINDUCED_REP1.featureCounts.tsv",
+                "featurecounts/RAP1_UNINDUCED_REP1.featureCounts.tsv.summary",
+                "featurecounts/RAP1_UNINDUCED_REP2.featureCounts.tsv",
+                "featurecounts/RAP1_UNINDUCED_REP2.featureCounts.tsv.summary",
+                "featurecounts/WT_REP1.featureCounts.tsv",
+                "featurecounts/WT_REP1.featureCounts.tsv.summary",
+                "featurecounts/WT_REP2.featureCounts.tsv",
+                "featurecounts/WT_REP2.featureCounts.tsv.summary",
                 "hisat2",
                 "hisat2/log",
                 "hisat2/log/RAP1_UNINDUCED_REP1.hisat2.summary.log",
@@ -98,6 +115,7 @@
                 "multiqc/multiqc_data/fastqc_sequence_counts_plot.txt",
                 "multiqc/multiqc_data/fastqc_sequence_duplication_levels_plot.txt",
                 "multiqc/multiqc_data/fastqc_top_overrepresented_sequences_table.txt",
+                "multiqc/multiqc_data/featureCounts_assignment_plot.txt",
                 "multiqc/multiqc_data/hisat2_pe_plot.txt",
                 "multiqc/multiqc_data/hisat2_se_plot.txt",
                 "multiqc/multiqc_data/llms-full.txt",
@@ -107,6 +125,7 @@
                 "multiqc/multiqc_data/multiqc_data.json",
                 "multiqc/multiqc_data/multiqc_fastp.txt",
                 "multiqc/multiqc_data/multiqc_fastqc.txt",
+                "multiqc/multiqc_data/multiqc_featurecounts.txt",
                 "multiqc/multiqc_data/multiqc_general_stats.txt",
                 "multiqc/multiqc_data/multiqc_hisat2.txt",
                 "multiqc/multiqc_data/multiqc_picard_dups.txt",
@@ -146,6 +165,8 @@
                 "multiqc/multiqc_plots/pdf/fastqc_sequence_counts_plot-pct.pdf",
                 "multiqc/multiqc_plots/pdf/fastqc_sequence_duplication_levels_plot.pdf",
                 "multiqc/multiqc_plots/pdf/fastqc_top_overrepresented_sequences_table.pdf",
+                "multiqc/multiqc_plots/pdf/featureCounts_assignment_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/featureCounts_assignment_plot-pct.pdf",
                 "multiqc/multiqc_plots/pdf/hisat2_pe_plot-cnt.pdf",
                 "multiqc/multiqc_plots/pdf/hisat2_pe_plot-pct.pdf",
                 "multiqc/multiqc_plots/pdf/hisat2_se_plot-cnt.pdf",
@@ -180,6 +201,8 @@
                 "multiqc/multiqc_plots/png/fastqc_sequence_counts_plot-pct.png",
                 "multiqc/multiqc_plots/png/fastqc_sequence_duplication_levels_plot.png",
                 "multiqc/multiqc_plots/png/fastqc_top_overrepresented_sequences_table.png",
+                "multiqc/multiqc_plots/png/featureCounts_assignment_plot-cnt.png",
+                "multiqc/multiqc_plots/png/featureCounts_assignment_plot-pct.png",
                 "multiqc/multiqc_plots/png/hisat2_pe_plot-cnt.png",
                 "multiqc/multiqc_plots/png/hisat2_pe_plot-pct.png",
                 "multiqc/multiqc_plots/png/hisat2_se_plot-cnt.png",
@@ -214,6 +237,8 @@
                 "multiqc/multiqc_plots/svg/fastqc_sequence_counts_plot-pct.svg",
                 "multiqc/multiqc_plots/svg/fastqc_sequence_duplication_levels_plot.svg",
                 "multiqc/multiqc_plots/svg/fastqc_top_overrepresented_sequences_table.svg",
+                "multiqc/multiqc_plots/svg/featureCounts_assignment_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/featureCounts_assignment_plot-pct.svg",
                 "multiqc/multiqc_plots/svg/hisat2_pe_plot-cnt.svg",
                 "multiqc/multiqc_plots/svg/hisat2_pe_plot-pct.svg",
                 "multiqc/multiqc_plots/svg/hisat2_se_plot-cnt.svg",
@@ -277,6 +302,15 @@
                 "tpm/gene_tpm.tsv"
             ],
             [
+                "gene_counts.tsv:md5,837ccc5c3d33b1689ead6c257fa31b63",
+                "RAP1_UNINDUCED_REP1.featureCounts.tsv:md5,c21b23b9871bf82e7acd4150a6f9287f",
+                "RAP1_UNINDUCED_REP1.featureCounts.tsv.summary:md5,e101e3bd5d1f05fec7df8ea08a70165d",
+                "RAP1_UNINDUCED_REP2.featureCounts.tsv:md5,8dbf215e4c85cb4bdb52cae682988438",
+                "RAP1_UNINDUCED_REP2.featureCounts.tsv.summary:md5,5ecc38198f38cb71317d1fe4667e62e4",
+                "WT_REP1.featureCounts.tsv:md5,c2b83fe500abf096423b147add4f3d99",
+                "WT_REP1.featureCounts.tsv.summary:md5,23a761de5c4ab60d609ddbaf82575311",
+                "WT_REP2.featureCounts.tsv:md5,72bdf65f24763e5a6c6b1b32fb6ba0fc",
+                "WT_REP2.featureCounts.tsv.summary:md5,a3962cc2bdc8e1e30604313d01a3e7ce",
                 "RAP1_UNINDUCED_REP1.hisat2.summary.log:md5,46faca8ac38bd280ef891c82632b0693",
                 "RAP1_UNINDUCED_REP2.hisat2.summary.log:md5,99b53b87f4e248f383343b1b6503175e",
                 "WT_REP1.hisat2.summary.log:md5,9cc1777547e06b4ed52d9a975a50f0a0",
@@ -305,10 +339,12 @@
                 "fastqc_per_sequence_quality_scores_plot.txt:md5,8e17a13ef2026b520c47b70f2f78c846",
                 "fastqc_sequence_counts_plot.txt:md5,3c0b6197a5d5854257ff15e93861d990",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,e8d6aad6c4b067bb01e2e9f95a9ee31c",
+                "featureCounts_assignment_plot.txt:md5,bc2357014ba099a00986eaa7b4d71b29",
                 "hisat2_pe_plot.txt:md5,8e128227d7ea626dc6eabcf0830f6a45",
                 "hisat2_se_plot.txt:md5,7e5ae7ae731419932b2f69d44acd05e0",
-                "multiqc_citations.txt:md5,1c55f861c39e3dd84bcbec2da77ab98a",
+                "multiqc_citations.txt:md5,bb6775dc5b45797b4550290c588f0f97",
                 "multiqc_fastqc.txt:md5,4a5f3c5e77d35125a61b11f4a7b13681",
+                "multiqc_featurecounts.txt:md5,55560a79b6c8991fb4a2102129a14611",
                 "multiqc_hisat2.txt:md5,93480fa34e8fb19313817df369dbe04b",
                 "multiqc_picard_dups.txt:md5,7f54897802eaf271c44211712578ad87",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
@@ -339,9 +375,9 @@
                 "gene_tpm.tsv:md5,a8d29e1664ca190ef0f39a13024b3daa"
             ]
         ],
-        "timestamp": "2026-10-07T21:45:56.87791943",
+        "timestamp": "2026-10-08T13:25:11.810992575",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.5",
             "nextflow": "26.04.6"
         }
     }

@@ -68,12 +68,13 @@ workflow CWBDPROJECT {
     ch_multiqc_files = ch_multiqc_files.mix(MARKDUP.out.multiqc_files)
 
     //
-    // SUBWORKFLOW: Gene level TPM per sample with StringTie, merged into one table
+    // SUBWORKFLOW: Gene level TPM per sample with StringTie and read counts with featureCounts, each merged into one table
     //
     QUANTIFY(
         MARKDUP.out.bam,
         file(params.gtf, checkIfExists: true)
     )
+    ch_multiqc_files = ch_multiqc_files.mix(QUANTIFY.out.multiqc_files)
 
     //
     // Collate and save software versions
