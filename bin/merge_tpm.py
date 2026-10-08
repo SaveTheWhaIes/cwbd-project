@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 
+"""
 Merges the StringTie gene abundance tables into one genes x samples TPM table.
 
 Input: StringTie -A gene abudance files (one per sample)

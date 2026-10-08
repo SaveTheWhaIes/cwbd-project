@@ -17,10 +17,10 @@ workflow QC_TRIM {
         single:   reads.size() == (meta.single_end ? 1 : 2)
         multiple: true
     }
-    
+
     // concatenate the paired-end reads if multiple true
     CAT_FASTQ(ch_runs.multiple)
-    
+
     // merge the single-end reads with the concatenated paired-end reads
     def ch_merged = ch_runs.single.mix(CAT_FASTQ.out.reads)
 

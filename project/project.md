@@ -4,8 +4,7 @@ Student1: Miriam Beermann
 
 Student2: Laurens Hahn
 
-Project Github url: https://github.com/SaveTheWhaIes/cwbd-project 
-
+Project Github url: https://github.com/SaveTheWhaIes/cwbd-project
 
 # Next steps
 
@@ -13,8 +12,6 @@ Project Github url: https://github.com/SaveTheWhaIes/cwbd-project
 2. Work together on the pipeline
 3. Commit+push your work frequently
 4. Write your report and also upload your paper **in PDF format**
-
-
 
 # Deadline
 

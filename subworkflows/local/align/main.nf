@@ -1,5 +1,5 @@
 // SUBWORKFLOW: ALIGN
-// splice-aware alignment with HISAT2 against a reference genome, then sorting 
+// splice-aware alignment with HISAT2 against a reference genome, then sorting
 // either uses a pre-built HISAT2 index or builds one from the provided genome FASTA and GTF
 
 
