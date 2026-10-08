@@ -8,6 +8,7 @@ include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 include { ALIGN                  } from '../subworkflows/local/align/main'
 include { MARKDUP                } from '../subworkflows/local/markdup/main'
 include { QUANTIFY               } from '../subworkflows/local/quantify/main'
+include { ALIGNMENT_QC           } from '../subworkflows/local/alignment_qc/main'
 include { UNTAR                  } from '../modules/nf-core/untar/main'
 include { paramsSummaryMap       } from 'plugin/nf-schema'
 include { paramsSummaryMultiqc   } from '../subworkflows/nf-core/utils_nfcore_pipeline'
@@ -45,7 +46,7 @@ workflow CWBDPROJECT {
     def ch_hisat2_index = []
     if (params.hisat2_index) {
         def hisat2_index = file(params.hisat2_index, checkIfExists: true)
-        if (hisat2_index.name.endsWith('.tar.gz')) { // index can be folder or tar.gz 
+        if (hisat2_index.name.endsWith('.tar.gz')) { // index can be folder or tar.gz
             UNTAR(channel.value([ [id: 'genome'], hisat2_index ]))
             ch_hisat2_index = UNTAR.out.untar
         } else {
@@ -57,7 +58,8 @@ workflow CWBDPROJECT {
         QC_TRIM.out.reads,
         file(params.fasta, checkIfExists: true),
         file(params.gtf, checkIfExists: true),
-        ch_hisat2_index
+        ch_hisat2_index,
+        params.hisat2_build_memory
     )
     ch_multiqc_files = ch_multiqc_files.mix(ALIGN.out.multiqc_files)
 
@@ -68,12 +70,24 @@ workflow CWBDPROJECT {
     ch_multiqc_files = ch_multiqc_files.mix(MARKDUP.out.multiqc_files)
 
     //
-    // SUBWORKFLOW: Gene level TPM per sample with StringTie, merged into one table
+    // SUBWORKFLOW: Strandedness check and read distribution with RSeQC, reads per biotype with featureCounts
+    //
+    ALIGNMENT_QC(
+        MARKDUP.out.bam,
+        MARKDUP.out.bai,
+        file(params.gtf, checkIfExists: true),
+        file("${projectDir}/assets/biotypes_header.txt", checkIfExists: true)
+    )
+    ch_multiqc_files = ch_multiqc_files.mix(ALIGNMENT_QC.out.multiqc_files)
+
+    //
+    // SUBWORKFLOW: Gene level TPM per sample with StringTie and read counts with featureCounts, each merged into one table
     //
     QUANTIFY(
         MARKDUP.out.bam,
         file(params.gtf, checkIfExists: true)
     )
+    ch_multiqc_files = ch_multiqc_files.mix(QUANTIFY.out.multiqc_files)
 
     //
     // Collate and save software versions

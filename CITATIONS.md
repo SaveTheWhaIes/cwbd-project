@@ -30,9 +30,17 @@
 
 > Picard Toolkit. 2019. Broad Institute, GitHub Repository. https://broadinstitute.github.io/picard; Broad Institute
 
+- [RSeQC](https://pubmed.ncbi.nlm.nih.gov/22743226/)
+
+> Wang L, Wang S, Li W. RSeQC: quality control of RNA-seq experiments Bioinformatics. 2012 Aug 15;28(16):2184-5. doi: 10.1093/bioinformatics/bts356. Epub 2012 Jun 27. PubMed PMID: 22743226.
+
 - [StringTie2](https://pubmed.ncbi.nlm.nih.gov/31842956/)
 
 > Kovaka S, Zimin AV, Pertea GM, Razaghi R, Salzberg SL, Pertea M. Transcriptome assembly from long-read RNA-seq alignments with StringTie2 Genome Biol. 2019 Dec 16;20(1):278. doi: 10.1186/s13059-019-1910-1. PubMed PMID: 31842956; PubMed Central PMCID: PMC6912988.
+
+- [featureCounts](https://pubmed.ncbi.nlm.nih.gov/24227677/)
+
+> Liao Y, Smyth GK, Shi W. featureCounts: an efficient general purpose program for assigning sequence reads to genomic features. Bioinformatics. 2014 Apr 1;30(7):923-30. doi: 10.1093/bioinformatics/btt656. Epub 2013 Nov 13. PubMed PMID: 24227677.
 
 - [MultiQC](https://pubmed.ncbi.nlm.nih.gov/27312411/)
 

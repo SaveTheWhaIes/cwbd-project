@@ -2,6 +2,12 @@
     "-profile test_human": {
         "content": [
             {
+                "CUSTOM_MULTIQCCUSTOMBIOTYPE": {
+                    "python": "3.12.12"
+                },
+                "EAUTILS_GTF2BED": {
+                    "perl": "5.26.2"
+                },
                 "FASTP": {
                     "fastp": "1.3.6"
                 },
@@ -19,23 +25,49 @@
                     "hisat2": "2.2.3",
                     "samtools": 1.24
                 },
+                "MERGE_COUNTS": {
+                    "python": "3.14.5"
+                },
                 "MERGE_TPM": {
                     "python": "3.14.5"
                 },
                 "PICARD_MARKDUPLICATES": {
                     "picard": "3.5.0"
                 },
+                "RSEQC_INFEREXPERIMENT": {
+                    "rseqc": "5.0.4"
+                },
+                "RSEQC_READDISTRIBUTION": {
+                    "rseqc": "5.0.4"
+                },
+                "SAMTOOLS_FLAGSTAT": {
+                    "samtools": 1.24
+                },
+                "SAMTOOLS_IDXSTATS": {
+                    "samtools": 1.24
+                },
                 "SAMTOOLS_SORT": {
+                    "samtools": 1.24
+                },
+                "SAMTOOLS_STATS": {
                     "samtools": 1.24
                 },
                 "STRINGTIE_STRINGTIE": {
                     "stringtie": "3.0.3"
                 },
+                "SUBREAD_FEATURECOUNTS": {
+                    "subread": "2.1.1"
+                },
+                "SUBREAD_FEATURECOUNTS_BIOTYPE": {
+                    "subread": "2.1.1"
+                },
                 "Workflow": {
-                    "SaveTheWhaIes/cwbd-project": "v1.0.0"
+                    "SaveTheWhaIes/cwbd-project": "v1.1.0"
                 }
             },
             [
+                "counts",
+                "counts/gene_counts.tsv",
                 "fastp",
                 "fastp/HUMAN_CHR22.fastp.html",
                 "fastp/HUMAN_CHR22.fastp.json",
@@ -45,6 +77,14 @@
                 "fastqc/HUMAN_CHR22_1_fastqc.zip",
                 "fastqc/HUMAN_CHR22_2_fastqc.html",
                 "fastqc/HUMAN_CHR22_2_fastqc.zip",
+                "featurecounts",
+                "featurecounts/HUMAN_CHR22.featureCounts.tsv",
+                "featurecounts/HUMAN_CHR22.featureCounts.tsv.summary",
+                "featurecounts/biotype",
+                "featurecounts/biotype/HUMAN_CHR22.biotype.featureCounts.tsv",
+                "featurecounts/biotype/HUMAN_CHR22.biotype.featureCounts.tsv.summary",
+                "featurecounts/biotype/HUMAN_CHR22.biotype_counts_mqc.tsv",
+                "featurecounts/biotype/HUMAN_CHR22.biotype_counts_rrna_mqc.tsv",
                 "hisat2",
                 "hisat2/log",
                 "hisat2/log/HUMAN_CHR22.hisat2.summary.log",
@@ -76,6 +116,7 @@
                 "multiqc/multiqc_data/fastqc_sequence_duplication_levels_plot.txt",
                 "multiqc/multiqc_data/fastqc_sequence_length_distribution_plot.txt",
                 "multiqc/multiqc_data/fastqc_top_overrepresented_sequences_table.txt",
+                "multiqc/multiqc_data/featureCounts_assignment_plot.txt",
                 "multiqc/multiqc_data/hisat2_pe_plot.txt",
                 "multiqc/multiqc_data/llms-full.txt",
                 "multiqc/multiqc_data/multiqc.log",
@@ -84,9 +125,16 @@
                 "multiqc/multiqc_data/multiqc_data.json",
                 "multiqc/multiqc_data/multiqc_fastp.txt",
                 "multiqc/multiqc_data/multiqc_fastqc.txt",
+                "multiqc/multiqc_data/multiqc_featurecounts.txt",
+                "multiqc/multiqc_data/multiqc_featurecounts_biotype_plot.txt",
                 "multiqc/multiqc_data/multiqc_general_stats.txt",
                 "multiqc/multiqc_data/multiqc_hisat2.txt",
                 "multiqc/multiqc_data/multiqc_picard_dups.txt",
+                "multiqc/multiqc_data/multiqc_rseqc_infer_experiment.txt",
+                "multiqc/multiqc_data/multiqc_rseqc_read_distribution.txt",
+                "multiqc/multiqc_data/multiqc_samtools_flagstat.txt",
+                "multiqc/multiqc_data/multiqc_samtools_idxstats.txt",
+                "multiqc/multiqc_data/multiqc_samtools_stats.txt",
                 "multiqc/multiqc_data/multiqc_software_versions.txt",
                 "multiqc/multiqc_data/multiqc_sources.txt",
                 "multiqc/multiqc_data/picard_MarkIlluminaAdapters_histogram.txt",
@@ -94,6 +142,16 @@
                 "multiqc/multiqc_data/picard_MeanQualityByCycle_histogram_1.txt",
                 "multiqc/multiqc_data/picard_QualityScoreDistribution_histogram.txt",
                 "multiqc/multiqc_data/picard_deduplication.txt",
+                "multiqc/multiqc_data/rseqc_infer_experiment_plot.txt",
+                "multiqc/multiqc_data/rseqc_read_distribution_plot.txt",
+                "multiqc/multiqc_data/samtools-flagstat-pct-table.txt",
+                "multiqc/multiqc_data/samtools-flagstat-table.txt",
+                "multiqc/multiqc_data/samtools-idxstats-mapped-reads-plot_Normalised_Counts.txt",
+                "multiqc/multiqc_data/samtools-idxstats-mapped-reads-plot_Observed_over_Expected_Counts.txt",
+                "multiqc/multiqc_data/samtools-idxstats-mapped-reads-plot_Raw_Counts.txt",
+                "multiqc/multiqc_data/samtools-stats-dp.txt",
+                "multiqc/multiqc_data/samtools_alignment_plot.txt",
+                "multiqc/multiqc_data/samtools_insert_size.txt",
                 "multiqc/multiqc_plots",
                 "multiqc/multiqc_plots/pdf",
                 "multiqc/multiqc_plots/pdf/fastp-insert-size-plot.pdf",
@@ -124,10 +182,29 @@
                 "multiqc/multiqc_plots/pdf/fastqc_sequence_duplication_levels_plot.pdf",
                 "multiqc/multiqc_plots/pdf/fastqc_sequence_length_distribution_plot.pdf",
                 "multiqc/multiqc_plots/pdf/fastqc_top_overrepresented_sequences_table.pdf",
+                "multiqc/multiqc_plots/pdf/featureCounts_assignment_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/featureCounts_assignment_plot-pct.pdf",
+                "multiqc/multiqc_plots/pdf/featurecounts_biotype_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/featurecounts_biotype_plot-pct.pdf",
                 "multiqc/multiqc_plots/pdf/hisat2_pe_plot-cnt.pdf",
                 "multiqc/multiqc_plots/pdf/hisat2_pe_plot-pct.pdf",
                 "multiqc/multiqc_plots/pdf/picard_deduplication-cnt.pdf",
                 "multiqc/multiqc_plots/pdf/picard_deduplication-pct.pdf",
+                "multiqc/multiqc_plots/pdf/rseqc_infer_experiment_plot.pdf",
+                "multiqc/multiqc_plots/pdf/rseqc_read_distribution_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/rseqc_read_distribution_plot-pct.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-flagstat-pct-table.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-flagstat-table.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-idxstats-mapped-reads-plot_Normalised_Counts-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-idxstats-mapped-reads-plot_Normalised_Counts-log.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-idxstats-mapped-reads-plot_Observed_over_Expected_Counts-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-idxstats-mapped-reads-plot_Observed_over_Expected_Counts-log.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-idxstats-mapped-reads-plot_Raw_Counts-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-idxstats-mapped-reads-plot_Raw_Counts-log.pdf",
+                "multiqc/multiqc_plots/pdf/samtools-stats-dp.pdf",
+                "multiqc/multiqc_plots/pdf/samtools_alignment_plot-cnt.pdf",
+                "multiqc/multiqc_plots/pdf/samtools_alignment_plot-pct.pdf",
+                "multiqc/multiqc_plots/pdf/samtools_insert_size.pdf",
                 "multiqc/multiqc_plots/png",
                 "multiqc/multiqc_plots/png/fastp-insert-size-plot.png",
                 "multiqc/multiqc_plots/png/fastp-seq-content-gc-plot_Read_1_After_filtering.png",
@@ -157,10 +234,29 @@
                 "multiqc/multiqc_plots/png/fastqc_sequence_duplication_levels_plot.png",
                 "multiqc/multiqc_plots/png/fastqc_sequence_length_distribution_plot.png",
                 "multiqc/multiqc_plots/png/fastqc_top_overrepresented_sequences_table.png",
+                "multiqc/multiqc_plots/png/featureCounts_assignment_plot-cnt.png",
+                "multiqc/multiqc_plots/png/featureCounts_assignment_plot-pct.png",
+                "multiqc/multiqc_plots/png/featurecounts_biotype_plot-cnt.png",
+                "multiqc/multiqc_plots/png/featurecounts_biotype_plot-pct.png",
                 "multiqc/multiqc_plots/png/hisat2_pe_plot-cnt.png",
                 "multiqc/multiqc_plots/png/hisat2_pe_plot-pct.png",
                 "multiqc/multiqc_plots/png/picard_deduplication-cnt.png",
                 "multiqc/multiqc_plots/png/picard_deduplication-pct.png",
+                "multiqc/multiqc_plots/png/rseqc_infer_experiment_plot.png",
+                "multiqc/multiqc_plots/png/rseqc_read_distribution_plot-cnt.png",
+                "multiqc/multiqc_plots/png/rseqc_read_distribution_plot-pct.png",
+                "multiqc/multiqc_plots/png/samtools-flagstat-pct-table.png",
+                "multiqc/multiqc_plots/png/samtools-flagstat-table.png",
+                "multiqc/multiqc_plots/png/samtools-idxstats-mapped-reads-plot_Normalised_Counts-cnt.png",
+                "multiqc/multiqc_plots/png/samtools-idxstats-mapped-reads-plot_Normalised_Counts-log.png",
+                "multiqc/multiqc_plots/png/samtools-idxstats-mapped-reads-plot_Observed_over_Expected_Counts-cnt.png",
+                "multiqc/multiqc_plots/png/samtools-idxstats-mapped-reads-plot_Observed_over_Expected_Counts-log.png",
+                "multiqc/multiqc_plots/png/samtools-idxstats-mapped-reads-plot_Raw_Counts-cnt.png",
+                "multiqc/multiqc_plots/png/samtools-idxstats-mapped-reads-plot_Raw_Counts-log.png",
+                "multiqc/multiqc_plots/png/samtools-stats-dp.png",
+                "multiqc/multiqc_plots/png/samtools_alignment_plot-cnt.png",
+                "multiqc/multiqc_plots/png/samtools_alignment_plot-pct.png",
+                "multiqc/multiqc_plots/png/samtools_insert_size.png",
                 "multiqc/multiqc_plots/svg",
                 "multiqc/multiqc_plots/svg/fastp-insert-size-plot.svg",
                 "multiqc/multiqc_plots/svg/fastp-seq-content-gc-plot_Read_1_After_filtering.svg",
@@ -190,10 +286,29 @@
                 "multiqc/multiqc_plots/svg/fastqc_sequence_duplication_levels_plot.svg",
                 "multiqc/multiqc_plots/svg/fastqc_sequence_length_distribution_plot.svg",
                 "multiqc/multiqc_plots/svg/fastqc_top_overrepresented_sequences_table.svg",
+                "multiqc/multiqc_plots/svg/featureCounts_assignment_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/featureCounts_assignment_plot-pct.svg",
+                "multiqc/multiqc_plots/svg/featurecounts_biotype_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/featurecounts_biotype_plot-pct.svg",
                 "multiqc/multiqc_plots/svg/hisat2_pe_plot-cnt.svg",
                 "multiqc/multiqc_plots/svg/hisat2_pe_plot-pct.svg",
                 "multiqc/multiqc_plots/svg/picard_deduplication-cnt.svg",
                 "multiqc/multiqc_plots/svg/picard_deduplication-pct.svg",
+                "multiqc/multiqc_plots/svg/rseqc_infer_experiment_plot.svg",
+                "multiqc/multiqc_plots/svg/rseqc_read_distribution_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/rseqc_read_distribution_plot-pct.svg",
+                "multiqc/multiqc_plots/svg/samtools-flagstat-pct-table.svg",
+                "multiqc/multiqc_plots/svg/samtools-flagstat-table.svg",
+                "multiqc/multiqc_plots/svg/samtools-idxstats-mapped-reads-plot_Normalised_Counts-cnt.svg",
+                "multiqc/multiqc_plots/svg/samtools-idxstats-mapped-reads-plot_Normalised_Counts-log.svg",
+                "multiqc/multiqc_plots/svg/samtools-idxstats-mapped-reads-plot_Observed_over_Expected_Counts-cnt.svg",
+                "multiqc/multiqc_plots/svg/samtools-idxstats-mapped-reads-plot_Observed_over_Expected_Counts-log.svg",
+                "multiqc/multiqc_plots/svg/samtools-idxstats-mapped-reads-plot_Raw_Counts-cnt.svg",
+                "multiqc/multiqc_plots/svg/samtools-idxstats-mapped-reads-plot_Raw_Counts-log.svg",
+                "multiqc/multiqc_plots/svg/samtools-stats-dp.svg",
+                "multiqc/multiqc_plots/svg/samtools_alignment_plot-cnt.svg",
+                "multiqc/multiqc_plots/svg/samtools_alignment_plot-pct.svg",
+                "multiqc/multiqc_plots/svg/samtools_insert_size.svg",
                 "multiqc/multiqc_report.html",
                 "picard",
                 "picard/HUMAN_CHR22.markdup.sorted.bai",
@@ -201,6 +316,13 @@
                 "picard/HUMAN_CHR22.markdup.sorted.metrics.txt",
                 "pipeline_info",
                 "pipeline_info/cwbdproject_software_mqc_versions.yml",
+                "rseqc",
+                "rseqc/HUMAN_CHR22.infer_experiment.txt",
+                "rseqc/HUMAN_CHR22.read_distribution.txt",
+                "samtools",
+                "samtools/HUMAN_CHR22.flagstat",
+                "samtools/HUMAN_CHR22.idxstats",
+                "samtools/HUMAN_CHR22.stats",
                 "stringtie",
                 "stringtie/HUMAN_CHR22.ballgown",
                 "stringtie/HUMAN_CHR22.ballgown/e2t.ctab",
@@ -215,6 +337,13 @@
                 "tpm/gene_tpm.tsv"
             ],
             [
+                "gene_counts.tsv:md5,1924edcac5cfa12d0f52070379495d16",
+                "HUMAN_CHR22.featureCounts.tsv:md5,1380ffe2a65040e465ac62ccaaaefda6",
+                "HUMAN_CHR22.featureCounts.tsv.summary:md5,8101b4bfefbfc285cdeb04c89431543d",
+                "HUMAN_CHR22.biotype.featureCounts.tsv:md5,da53f68b3b1d7839820b2b31b4894a5d",
+                "HUMAN_CHR22.biotype.featureCounts.tsv.summary:md5,8101b4bfefbfc285cdeb04c89431543d",
+                "HUMAN_CHR22.biotype_counts_mqc.tsv:md5,614152767af1d278a9afe352abf6b9d3",
+                "HUMAN_CHR22.biotype_counts_rrna_mqc.tsv:md5,5d5e83410d8021556b8ace4646b963c9",
                 "HUMAN_CHR22.hisat2.summary.log:md5,0a85bb7ccc47304922904d01c85b5508",
                 "fastp-insert-size-plot.txt:md5,98fa40a4982dfa9f2d465a6d9cc9fe38",
                 "fastp-seq-content-gc-plot_Read_1_After_filtering.txt:md5,39015a56a3244f5df6a5b31e8a407c46",
@@ -241,16 +370,39 @@
                 "fastqc_sequence_counts_plot.txt:md5,0348f1e1802aa9b4cb7a70c862e4c502",
                 "fastqc_sequence_duplication_levels_plot.txt:md5,333d92e6690711dfeb597853726a218d",
                 "fastqc_sequence_length_distribution_plot.txt:md5,211bf5f66682eb7d59b51b3793326a0b",
+                "featureCounts_assignment_plot.txt:md5,e651e88f98796f2537d16ba1a3badd7f",
                 "hisat2_pe_plot.txt:md5,de293e09b028238ffbaa8d4f5b68c4af",
-                "multiqc_citations.txt:md5,1c55f861c39e3dd84bcbec2da77ab98a",
+                "multiqc_citations.txt:md5,776163a4c4730d35d470ac78f4e626a4",
                 "multiqc_fastqc.txt:md5,033ff3740200ffdf44e6e4d6d6e3bb5c",
+                "multiqc_featurecounts.txt:md5,c51ea198db29ae88757b7c4e28e5d13a",
+                "multiqc_featurecounts_biotype_plot.txt:md5,6976c0d93d2ca5ab9c759e3aa9741e5a",
                 "multiqc_hisat2.txt:md5,7c1a3b143af94774143e252d317bf843",
                 "multiqc_picard_dups.txt:md5,d0cdc230d3d905390c1c54a9548e1bae",
+                "multiqc_rseqc_infer_experiment.txt:md5,7eb2cadc763e74fd1f4bc75925d20745",
+                "multiqc_rseqc_read_distribution.txt:md5,112c0e015f5588ef3dfaef581a934d73",
+                "multiqc_samtools_flagstat.txt:md5,e7680c49782aa9d5ed3950c43df992c8",
+                "multiqc_samtools_idxstats.txt:md5,bc9bc16a6e50446ae6f2c677e2d76108",
+                "multiqc_samtools_stats.txt:md5,f24c3ba4ee453d248e6b87ab43d0b313",
                 "picard_MarkIlluminaAdapters_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_MeanQualityByCycle_histogram_1.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_QualityScoreDistribution_histogram.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
                 "picard_deduplication.txt:md5,87305ab4da16773f870a0c1dc3d5e0ed",
+                "rseqc_infer_experiment_plot.txt:md5,ea84927d70d5f33957275536aad57882",
+                "rseqc_read_distribution_plot.txt:md5,b42e7bc9e47017a327a4b83567933e46",
+                "samtools-flagstat-pct-table.txt:md5,823b12a49cbef6f273d36904a68647d5",
+                "samtools-flagstat-table.txt:md5,391f45ef2ba81108acbb83053f26121b",
+                "samtools-idxstats-mapped-reads-plot_Normalised_Counts.txt:md5,ec7e53379b6dbf8e3b5256f9d83d34db",
+                "samtools-idxstats-mapped-reads-plot_Observed_over_Expected_Counts.txt:md5,ec7e53379b6dbf8e3b5256f9d83d34db",
+                "samtools-idxstats-mapped-reads-plot_Raw_Counts.txt:md5,cdac634693d29921b872f297d0d20d0e",
+                "samtools-stats-dp.txt:md5,340152dc1d8658fb5d9ac94dec8b22ce",
+                "samtools_alignment_plot.txt:md5,4d9ebc9b16d427d899a307cd12c8bcd0",
+                "samtools_insert_size.txt:md5,559809e57cc2fabc79e70069eb044d59",
+                "HUMAN_CHR22.infer_experiment.txt:md5,5128b1ad052c9d18d07c75c28b4bfc5f",
+                "HUMAN_CHR22.read_distribution.txt:md5,24e44be5beade0371c623270adbd3340",
+                "HUMAN_CHR22.flagstat:md5,2e6adc637b939ffff535f42ebce8a42d",
+                "HUMAN_CHR22.idxstats:md5,8afab9b84914c94c27d3c00117581cf5",
+                "HUMAN_CHR22.stats:md5,422d6637aee16eedad1f228f1177d4b8",
                 "e2t.ctab:md5,9ae42e056c955a88a883e5e917840d77",
                 "e_data.ctab:md5,3ca8e89c3c76592f3ed7aeec443a55d3",
                 "i2t.ctab:md5,658131af118cfb416939044fdb5411de",
@@ -259,9 +411,9 @@
                 "gene_tpm.tsv:md5,892f656a27a33a507cde405a811f0999"
             ]
         ],
-        "timestamp": "2026-10-07T21:39:44.77566325",
+        "timestamp": "2026-10-08T21:34:27.225643642",
         "meta": {
-            "nf-test": "0.9.4",
+            "nf-test": "0.9.5",
             "nextflow": "26.04.6"
         }
     }

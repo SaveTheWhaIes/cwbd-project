@@ -16,8 +16,13 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [fastp](#fastp) - Adapter and quality trimming
 - [HISAT2](#hisat2) - Alignment to the genome
 - [picard MarkDuplicates](#picard-markduplicates) - Duplicate read marking
+- [SAMtools](#samtools) - Alignment statistics
+- [RSeQC](#rseqc) - Strandedness check and read distribution
+- [Biotype counts](#biotype-counts) - Reads per gene biotype
 - [StringTie](#stringtie) - Gene level quantification
 - [TPM table](#tpm-table) - Gene TPM values of all samples in one table
+- [featureCounts](#featurecounts) - Gene level read counts
+- [Count table](#count-table) - Gene read counts of all samples in one table
 - [MultiQC](#multiqc) - Aggregate report describing results and QC from the whole pipeline
 - [Pipeline information](#pipeline-information) - Report metrics generated during the workflow execution
 
@@ -74,6 +79,28 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 
 Unless you are using [UMIs](https://emea.illumina.com/science/sequencing-method-explorer/kits-and-arrays/umi.html) it is not possible to establish whether the fragments you have sequenced from your sample were derived via true biological duplication (i.e. sequencing independent template fragments) or as a result of PCR biases introduced during the library preparation. The pipeline uses [picard MarkDuplicates](https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates) to _mark_ the duplicate reads identified amongst the alignments to allow you to gauge the overall level of duplication in your samples. However, for RNA-seq data it is not recommended to physically remove duplicate reads from the alignments (unless you are using UMIs) because you expect a significant level of true biological duplication that arises from the same fragments being sequenced from for example highly expressed genes.
 
+### SAMtools
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `samtools/`
+  - `<SAMPLE>.stats`: full alignment statistics of the duplicate marked BAM (`samtools stats`): read lengths, insert sizes, mismatch
+
+### SAMtools
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `samtools/`
+  - `<SAMPLE>.stats`: full alignment statistics of the duplicate marked BAM (`samtools stats`): read lengths, insert sizes, mismatch rate, coverage.
+  - `<SAMPLE>.flagstat`: number of reads per SAM flag category (`samtools flagstat`): mapped, properly paired, duplicates, secondary.
+  - `<SAMPLE>.idxstats`: number of mapped reads per chromosome (`samtools idxstats`).
+
+</details>
+
+[SAMtools](https://www.htslib.org/) collects the alignment statistics of the duplicate marked BAM. No reference is passed, so `samtools stats` takes the mismatches from the NM and MD tags that HISAT2 writes. All three reports are shown in the MultiQC report; idxstats shows for example how many reads land on the mitochondrial chromosome.
+
 ### StringTie
 
 <details markdown="1">
@@ -89,6 +116,33 @@ Unless you are using [UMIs](https://emea.illumina.com/science/sequencing-method-
 
 [StringTie](https://ccb.jhu.edu/software/stringtie/) is run with `-e`, so it only estimates the abundance of the transcripts in the `--gtf` annotation and does not assemble new ones. The library strandedness from the samplesheet is passed on (`--rf` for `reverse`, `--fr` for `forward`).
 
+### RSeQC
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `rseqc/`
+  - `*.infer_experiment.txt`: fraction of reads that fit a forward, reverse or unstranded library.
+  - `*.read_distribution.txt`: number of reads on coding exons, UTRs, introns and the regions up and downstream of genes.
+
+</details>
+
+[RSeQC](https://rseqc.sourceforge.net/) checks the aligned reads against the gene models of the `--gtf`, converted to BED12 first. `infer_experiment.py` compares each read with the strand of the gene it overlaps. If 80 % or more of the assigned reads fit one direction the library is called `forward` or `reverse`, if both directions are within 10 % of each other it is `unstranded` (the thresholds of nf-core/rnaseq). When this differs from the samplesheet, the pipeline prints a warning but keeps running. `read_distribution.py` shows how many reads fall on exons versus introns and intergenic regions; a high intron share points to unspliced pre-mRNA or genomic DNA. Both reports are shown in the MultiQC report.
+
+### Biotype counts
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `featurecounts/biotype/`
+  - `*.biotype.featureCounts.tsv`: reads per gene biotype for one sample.
+  - `*.biotype_counts_mqc.tsv`: the same counts as a MultiQC bar plot.
+  - `*.biotype_counts_rrna_mqc.tsv`: share of reads on rRNA genes, for the General Statistics table.
+
+</details>
+
+featureCounts counts the reads per `gene_biotype` of the `--gtf` (`-g gene_biotype`), the same way as the gene counts (exons, read pairs, strandedness from the samplesheet). The plot shows how much of a library is mRNA (`protein_coding`) and how much falls on non-coding RNA such as `rRNA`, `misc_RNA` (for example the 7SL RNAs Rn7s1 and Rn7s2) or `lncRNA`. The GTF needs the `gene_biotype` attribute, as Ensembl GTFs have; GENCODE GTFs call it `gene_type` and are not supported.
+
 ### TPM table
 
 <details markdown="1">
@@ -100,6 +154,27 @@ Unless you are using [UMIs](https://emea.illumina.com/science/sequencing-method-
 </details>
 
 The gene abundance tables of all samples are merged into one table by `bin/merge_tpm.py`. If StringTie reports a gene on more than one row, the TPM values of these rows are summed. Columns are sorted by sample name and rows by gene ID.
+
+### featureCounts
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `featurecounts/`
+  - `*.featureCounts.tsv`: read counts per gene for one sample, with the gene coordinates, length and name.
+  - `*.featureCounts.tsv.summary`: number of read pairs that were assigned to a gene and why the others were not.
+
+</details>
+
+[featureCounts](https://subread.sourceforge.net/) counts the reads on the exons of each gene in the `--gtf` annotation (`-t exon -g gene_id`). For paired end data it counts fragments, not single reads (`--countReadPairs`). The library strandedness from the samplesheet is passed on (`-s 2` for `reverse`, `-s 1` for `forward`). Reads that map to several places or overlap more than one gene are not counted, and duplicates are counted. The summary is shown in the MultiQC report.
+
+### Count table
+
+<details markdown
+<summary>Output files</summary>  
+- `counts/`                                                        - `gene_counts.h one row per gene and one column per sample, holding the read counts from          featureCounts. Th_id` and`gene_name`.  
+</details>  
+The featureCounts tables of all samples are merged into one table by `bin/merrted by samplename and rows by gene ID. Unlike the TPM table, these raw counts can be used as inon tools likeDESeq2.
 
 ### MultiQC
 
