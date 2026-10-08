@@ -25,13 +25,14 @@ It was written as the project of the Computational Workflows for Biomedical Data
 4. Splice aware alignment to the genome ([`HISAT2`](https://daehwankimlab.github.io/hisat2/)), building the index first if none is given
 5. Sort and index alignments ([`SAMtools`](https://www.htslib.org/))
 6. Duplicate read marking, without removing them ([`Picard MarkDuplicates`](https://broadinstitute.github.io/picard/))
-7. Strandedness check and read distribution over genes ([`RSeQC`](https://rseqc.sourceforge.net/)), with a warning when the samplesheet strandedness does not match the data
-8. Reads per gene biotype, e.g. protein_coding, rRNA, misc_RNA ([`featureCounts`](https://subread.sourceforge.net/))
-9. Gene level quantification of the annotated transcripts ([`StringTie`](https://ccb.jhu.edu/software/stringtie/))
-10. Merge the gene TPM values of all samples into one table (`bin/merge_tpm.py`)
-11. Gene level read counts ([`featureCounts`](https://subread.sourceforge.net/))
-12. Merge the gene counts of all samples into one table (`bin/merge_counts.py`)
-13. Present QC for all steps ([`MultiQC`](http://multiqc.info/))
+7. Alignment statistics of the duplicate marked BAM ([`SAMtools`](https://www.htslib.org/) stats, flagstat, idxstats)
+8. Strandedness check and read distribution over genes ([`RSeQC`](https://rseqc.sourceforge.net/)), with a warning when the samplesheet strandedness does not match the data
+9. Reads per gene biotype, e.g. protein_coding, rRNA, misc_RNA ([`featureCounts`](https://subread.sourceforge.net/))
+10. Gene level quantification of the annotated transcripts ([`StringTie`](https://ccb.jhu.edu/software/stringtie/))
+11. Merge the gene TPM values of all samples into one table (`bin/merge_tpm.py`)
+12. Gene level read counts ([`featureCounts`](https://subread.sourceforge.net/))
+13. Merge the gene counts of all samples into one table (`bin/merge_counts.py`)
+14. Present QC for all steps ([`MultiQC`](http://multiqc.info/))
 
 ## Usage
 

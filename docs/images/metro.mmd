@@ -46,6 +46,9 @@ graph LR
 
     subgraph markdup [Duplicate marking]
         picard([Picard MarkDuplicates])
+        samtools_stats([SAMtools stats])
+
+        picard -->|light,full,prebuilt| samtools_stats
     end
 
     subgraph bamqc [Alignment QC]
@@ -82,7 +85,7 @@ graph LR
 
     fastp -->|light,full,prebuilt| extractsplicesites
     samtools_sort -->|light,full,prebuilt| picard
-    picard -->|light,full,prebuilt| infer_experiment
+    samtools_stats -->|light,full,prebuilt| infer_experiment
     biotype -->|light,full,prebuilt| featurecounts
     biotype -->|light,full,prebuilt| stringtie
     merge_counts -->|light,full,prebuilt| multiqc

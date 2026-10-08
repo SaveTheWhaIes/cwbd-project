@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [#20](https://github.com/SaveTheWhaIes/cwbd-project/pull/20) Metro map: one colour per way to run the pipeline (index built or prebuilt), wrapped into two rows after duplicate marking like nf-core/rnaseq, new Alignment QC section.
 - [#21](https://github.com/SaveTheWhaIes/cwbd-project/pull/21) Parameter `--hisat2_build_memory`: memory from which the built HISAT2 index gets splice sites and exons (full index), otherwise a light genome index; test for the full index; third line in the metro map.
 - [#22](https://github.com/SaveTheWhaIes/cwbd-project/pull/22) Biotype QC: featureCounts per gene biotype in ALIGNMENT_QC, bar plot and % rRNA in MultiQC, station in the metro map.
+- [#23](https://github.com/SaveTheWhaIes/cwbd-project/pull/23) SAMtools stats, flagstat and idxstats of the duplicate marked BAM in MARKDUP (nf-core subworkflow bam_stats_samtools), all three in MultiQC, station in the metro map.
 
 ### `Fixed`
 
