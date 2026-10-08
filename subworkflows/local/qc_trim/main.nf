@@ -1,5 +1,5 @@
 // SUBWORKFLOW: QC_TRIM
-// concatenates runs of the same sample, raw read QC and trimming, and then aligns the reads to the reference genome
+// concatenates runs of the same sample, raw read QC and trimming
 
 // import modules
 include { CAT_FASTQ } from '../../../modules/nf-core/cat/fastq/main'

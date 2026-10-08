@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+### `Added
+
+- [#17](https://github.com/SaveTheWhaIes/cwbd-project/pull/17) added animated metro map.
+
+### `Fixed`
+
+- [#16](https://github.com/SaveTheWhaIes/cwbd-project/pull/16) Metro map rewritten by hand from `docs/images/metro.mmd`.
+
 ## v1.0.0 - [2026-10-07]
 
 Initial release of SaveTheWhaIes/cwbd-project, created with the [nf-core](https://nf-co.re/) template.

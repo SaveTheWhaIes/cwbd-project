@@ -10,3 +10,4 @@ null/
 .nf-test.log
 .nf-test/
 results*/
+*.mp4

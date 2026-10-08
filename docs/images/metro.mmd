@@ -1,0 +1,80 @@
+%%metro title: cwbd-project
+%%metro style: dark
+%%metro line: main | Reads to gene TPM | #0570b0
+%%metro line: ref | Reference and index build | #f5a623
+%%metro line: prebuilt | Prebuilt index | #9b59b6
+%%metro line: qc | QC reporting | #2db572
+%%metro grid: qc_trim | 0,0
+%%metro grid: align | 1,0
+%%metro grid: markdup | 2,0
+%%metro grid: quantify | 3,0
+%%metro grid: reporting | 4,0
+%%metro file: reads_in | FASTQ
+%%metro file: fasta_in | FASTA
+%%metro file: gtf_in | GTF
+%%metro dir: index_in | HISAT2 index
+%%metro file: gtf_quant | GTF
+%%metro file: tpm_out | TSV | gene_tpm.tsv
+%%metro file: report_out | HTML | MultiQC report
+
+
+graph LR
+   subgraph qc_trim [QC and trimming]
+        reads_in[ ]
+        cat_fastq([cat fastq])
+        fastqc([FastQC])
+        fastp([fastp])
+
+        reads_in -->|main,qc| cat_fastq
+        cat_fastq -->|main,qc| fastp
+        cat_fastq -->|qc| fastqc
+    end
+
+    subgraph align [Alignment]
+        gtf_in[ ]
+        fasta_in[ ]
+        index_in[ ]
+        extractsplicesites([HISAT2 extract splice sites])
+        hisat2_build([HISAT2 build])
+        untar([untar])
+        hisat2_align([HISAT2 align])
+        samtools_sort([SAMtools sort])
+
+        extractsplicesites -->|ref| hisat2_build
+        extractsplicesites -->|ref| hisat2_align
+        hisat2_build -->|ref| hisat2_align
+        untar -->|prebuilt| hisat2_align
+        hisat2_align -->|main| samtools_sort
+        index_in -->|prebuilt| untar
+        fasta_in -->|ref| hisat2_build
+        gtf_in -->|ref| extractsplicesites
+    end
+
+    subgraph markdup [Duplicate marking]
+        picard([Picard MarkDuplicates])
+    end
+
+    subgraph quantify [Quantification]
+        gtf_quant[ ]
+        stringtie([StringTie])
+        merge_tpm([merge TPM])
+        tpm_out[ ]
+
+        gtf_quant -->|ref| stringtie
+        stringtie -->|main| merge_tpm
+        merge_tpm -->|main| tpm_out
+    end
+
+    subgraph reporting [Reporting]
+        multiqc([MultiQC])
+        report_out[ ]
+        multiqc -->|qc| report_out
+    end
+
+    fastp -->|main| hisat2_align
+    samtools_sort -->|main| picard
+    picard -->|main| stringtie
+    fastqc -->|qc| multiqc
+    fastp -->|qc| multiqc
+    hisat2_align -->|qc| multiqc
+    picard -->|qc| multiqc
