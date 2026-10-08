@@ -65,7 +65,7 @@
                     "subread": "2.1.1"
                 },
                 "Workflow": {
-                    "SaveTheWhaIes/cwbd-project": "v1.0.0"
+                    "SaveTheWhaIes/cwbd-project": "v1.1.0"
                 }
             },
             [
@@ -557,7 +557,7 @@
                 "gene_tpm.tsv:md5,a8d29e1664ca190ef0f39a13024b3daa"
             ]
         ],
-        "timestamp": "2026-10-08T21:15:31.002340385",
+        "timestamp": "2026-10-08T21:32:45.86733798",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
