@@ -12,10 +12,11 @@ include { SAMTOOLS_SORT             } from '../../../modules/nf-core/samtools/so
 workflow ALIGN {
 
     take:
-    ch_reads     // channel: [ val(meta), [ reads ] ], trimmed
-    fasta        // path: genome FASTA
-    gtf          // path: gene annotation GTF
-    hisat2_index // channel: [ val(meta), path(index) ], or [] to build one
+    ch_reads            // channel: [ val(meta), [ reads ] ], trimmed
+    fasta               // path: genome FASTA
+    gtf                 // path: gene annotation GTF
+    hisat2_index        // channel: [ val(meta), path(index) ], or [] to build one
+    hisat2_build_memory // string: memory from which the index is built with splice sites and exons
 
     main:
 
@@ -30,7 +31,7 @@ workflow ALIGN {
     } else {
         HISAT2_BUILD(
             ch_splicesites.map { meta, splicesites -> [ meta, fasta, gtf, splicesites ] },
-            '200.GB' // splice aware index only with this much memory (nf-core/rnaseq default)
+            hisat2_build_memory // splice aware index only with this much memory (nf-core/rnaseq default)
         )
         ch_index = HISAT2_BUILD.out.index
     }

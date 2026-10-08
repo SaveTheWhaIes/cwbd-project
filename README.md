@@ -17,7 +17,7 @@
 
 It was written as the project of the Computational Workflows for Biomedical Data course and is built on the [nf-core](https://nf-co.re) template.
 
-![SaveTheWhaIes/cwbd-project metro map](docs/images/cwbd_v4_animated.svg)
+![SaveTheWhaIes/cwbd-project metro map](docs/images/metro_animated.svg)
 
 1. Merge re-sequenced FASTQ files of the same sample ([`cat`](https://www.gnu.org/software/coreutils/manual/html_node/cat-invocation.html))
 2. Raw read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))

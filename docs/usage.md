@@ -71,15 +71,16 @@ For the data we tested on (GSE223541, mouse dorsal root ganglia) Salmon reported
 
 ## Reference genome
 
-| Parameter        | Required | Description                                                                                      |
-| ---------------- | -------- | ------------------------------------------------------------------------------------------------ |
-| `--fasta`        | yes      | Genome sequence in FASTA format.                                                                 |
-| `--gtf`          | yes      | Gene annotation in GTF format. StringTie and featureCounts only quantifiy the genes listed here. |
-| `--hisat2_index` | no       | Prebuilt HISAT2 index, either as a directory or as a `.tar.gz` archive of one.                   |
+| Parameter               | Required | Description                                                                                      |
+| ----------------------- | -------- | ------------------------------------------------------------------------------------------------ |
+| `--fasta`               | yes      | Genome sequence in FASTA format.                                                                 |
+| `--gtf`                 | yes      | Gene annotation in GTF format. StringTie and featureCounts only quantifiy the genes listed here. |
+| `--hisat2_index`        | no       | Prebuilt HISAT2 index, either as a directory or as a `.tar.gz` archive of one.                   |
+| `--hisat2_build_memory` | no       | Memory from which the built index gets splice sites and exons (default `200.GB`).                |
 
 FASTA, GTF and index have to come from the same genome release and use the same chromosome names. A GTF from Ensembl (`1`, `2`, ...) does not match a FASTA from UCSC (`chr1`, `chr2`, ...): the alignment still runs, but no read overlaps a gene and every TPM is 0.
 
-If `--hisat2_index` is not given, the pipeline builds the index from `--fasta` and `--gtf`. That is fine for small genomes like the test data. For mouse or human it is not: building a splice aware HISAT2 index needs far more memory than aligning against it, and the pipeline then falls back to an index without splice sites. For those genomes, build the index once (or download one) and pass it with `--hisat2_index`. The directory has to contain the `*.ht2` files, their common prefix does not matter.
+If `--hisat2_index` is not given, the pipeline builds the index from `--fasta` and `--gtf`. If HISAT2 build gets at least `--hisat2_build_memory` (default `200.GB`, as in nf-core/rnaseq), the index contains the splice sites and exons of the GTF (full index). With less memory it builds a plain genome index (light index), which for mouse needs about 8 GB instead of more than 160 GB. In both cases the alignment gets the splice sites from the GTF (`--known-splicesite-infile`), so a light index still aligns spliced reads; the full index is better for reads that only reach a few bases into the next exon. For large genomes, build the index once (or download one) and pass it with `--hisat2_index`. The directory has to contain the `*.ht2` files, their common prefix does not matter.
 
 ## Running the pipeline
 
