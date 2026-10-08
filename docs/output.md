@@ -16,6 +16,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 - [fastp](#fastp) - Adapter and quality trimming
 - [HISAT2](#hisat2) - Alignment to the genome
 - [picard MarkDuplicates](#picard-markduplicates) - Duplicate read marking
+- [SAMtools](#samtools) - Alignment statistics
 - [RSeQC](#rseqc) - Strandedness check and read distribution
 - [Biotype counts](#biotype-counts) - Reads per gene biotype
 - [StringTie](#stringtie) - Gene level quantification
@@ -77,6 +78,28 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
 </details>
 
 Unless you are using [UMIs](https://emea.illumina.com/science/sequencing-method-explorer/kits-and-arrays/umi.html) it is not possible to establish whether the fragments you have sequenced from your sample were derived via true biological duplication (i.e. sequencing independent template fragments) or as a result of PCR biases introduced during the library preparation. The pipeline uses [picard MarkDuplicates](https://broadinstitute.github.io/picard/command-line-overview.html#MarkDuplicates) to _mark_ the duplicate reads identified amongst the alignments to allow you to gauge the overall level of duplication in your samples. However, for RNA-seq data it is not recommended to physically remove duplicate reads from the alignments (unless you are using UMIs) because you expect a significant level of true biological duplication that arises from the same fragments being sequenced from for example highly expressed genes.
+
+### SAMtools
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `samtools/`
+  - `<SAMPLE>.stats`: full alignment statistics of the duplicate marked BAM (`samtools stats`): read lengths, insert sizes, mismatch
+
+### SAMtools
+
+<details markdown="1">
+<summary>Output files</summary>
+
+- `samtools/`
+  - `<SAMPLE>.stats`: full alignment statistics of the duplicate marked BAM (`samtools stats`): read lengths, insert sizes, mismatch rate, coverage.
+  - `<SAMPLE>.flagstat`: number of reads per SAM flag category (`samtools flagstat`): mapped, properly paired, duplicates, secondary.
+  - `<SAMPLE>.idxstats`: number of mapped reads per chromosome (`samtools idxstats`).
+
+</details>
+
+[SAMtools](https://www.htslib.org/) collects the alignment statistics of the duplicate marked BAM. No reference is passed, so `samtools stats` takes the mismatches from the NM and MD tags that HISAT2 writes. All three reports are shown in the MultiQC report; idxstats shows for example how many reads land on the mitochondrial chromosome.
 
 ### StringTie
 
