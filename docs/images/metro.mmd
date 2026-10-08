@@ -1,13 +1,14 @@
 %%metro title: cwbd-project
 %%metro style: dark
-%%metro line: build | Index built from FASTA and GTF (default) | #0570b0
+%%metro line: light | Light index built from FASTA (default) | #0570b0
+%%metro line: full | Full index with splice sites and exons (--hisat2_build_memory) | #2db572
 %%metro line: prebuilt | Prebuilt HISAT2 index (--hisat2_index) | #f5a623
 %%metro grid: qc_trim | 0,0
 %%metro grid: align | 1,0
 %%metro grid: markdup | 2,0
-%%metro grid: bamqc | 2,1
-%%metro grid: quantify | 1,1
-%%metro grid: reporting | 0,1
+%%metro grid: bamqc | 3,0
+%%metro grid: quantify | 2,1
+%%metro grid: reporting | 1,1
 %%metro file: reads_in | FASTQ
 %%metro file: tpm_out | TSV | gene_tpm.tsv
 %%metro file: counts_out | TSV | gene_counts.tsv
@@ -21,23 +22,26 @@ graph LR
         fastqc([FastQC])
         fastp([fastp])
 
-        reads_in -->|build,prebuilt| cat_fastq
-        cat_fastq -->|build,prebuilt| fastqc
-        fastqc -->|build,prebuilt| fastp
+        reads_in -->|light,full,prebuilt| cat_fastq
+        cat_fastq -->|light,full,prebuilt| fastqc
+        fastqc -->|light,full,prebuilt| fastp
     end
 
     subgraph align [Alignment]
         extractsplicesites([HISAT2 extract splice sites])
-        hisat2_build([HISAT2 build])
+        hisat2_build_light([HISAT2 build light])
+        hisat2_build([HISAT2 build full])
         untar([untar])
         hisat2_align([HISAT2 align])
         samtools_sort([SAMtools sort])
 
-        extractsplicesites -->|build| hisat2_build
+        extractsplicesites -->|light| hisat2_build_light
+        extractsplicesites -->|full| hisat2_build
         extractsplicesites -->|prebuilt| untar
-        hisat2_build -->|build| hisat2_align
+        hisat2_build_light -->|light| hisat2_align
+        hisat2_build -->|full| hisat2_align
         untar -->|prebuilt| hisat2_align
-        hisat2_align -->|build,prebuilt| samtools_sort
+        hisat2_align -->|light,full,prebuilt| samtools_sort
     end
 
     subgraph markdup [Duplicate marking]
@@ -45,11 +49,11 @@ graph LR
     end
 
     subgraph bamqc [Alignment QC]
-        %%metro direction: RL
+        %%metro direction: TB
         infer_experiment([RSeQC infer experiment])
         read_distribution([RSeQC read distribution])
 
-        infer_experiment -->|build,prebuilt| read_distribution
+        infer_experiment -->|light,full,prebuilt| read_distribution
     end
 
     subgraph quantify [Quantification]
@@ -61,22 +65,22 @@ graph LR
         merge_counts([merge counts])
         counts_out[ ]
 
-        stringtie -->|build,prebuilt| merge_tpm
-        merge_tpm -->|build,prebuilt| tpm_out
-        featurecounts -->|build,prebuilt| merge_counts
-        merge_counts -->|build,prebuilt| counts_out
+        stringtie -->|light,full,prebuilt| merge_tpm
+        merge_tpm -->|light,full,prebuilt| tpm_out
+        featurecounts -->|light,full,prebuilt| merge_counts
+        merge_counts -->|light,full,prebuilt| counts_out
     end
 
     subgraph reporting [Reporting]
         %%metro direction: RL
         multiqc([MultiQC])
         report_out[ ]
-        multiqc -->|build,prebuilt| report_out
+        multiqc -->|light,full,prebuilt| report_out
     end
 
-    fastp -->|build,prebuilt| extractsplicesites
-    samtools_sort -->|build,prebuilt| picard
-    picard -->|build,prebuilt| infer_experiment
-    read_distribution -->|build,prebuilt| featurecounts
-    read_distribution -->|build,prebuilt| stringtie
-    merge_counts -->|build,prebuilt| multiqc
+    fastp -->|light,full,prebuilt| extractsplicesites
+    samtools_sort -->|light,full,prebuilt| picard
+    picard -->|light,full,prebuilt| infer_experiment
+    read_distribution -->|light,full,prebuilt| featurecounts
+    read_distribution -->|light,full,prebuilt| stringtie
+    merge_counts -->|light,full,prebuilt| multiqc

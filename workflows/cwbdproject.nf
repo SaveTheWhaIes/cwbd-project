@@ -58,7 +58,8 @@ workflow CWBDPROJECT {
         QC_TRIM.out.reads,
         file(params.fasta, checkIfExists: true),
         file(params.gtf, checkIfExists: true),
-        ch_hisat2_index
+        ch_hisat2_index,
+        params.hisat2_build_memory
     )
     ch_multiqc_files = ch_multiqc_files.mix(ALIGN.out.multiqc_files)
 

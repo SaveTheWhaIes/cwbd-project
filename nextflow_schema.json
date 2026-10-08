@@ -206,6 +206,14 @@
                     "description": "Path to a prebuilt HISAT2 index directory, or a .tar.gz archive of one",
                     "help_text": "If not given, the index is built from `--fasta` and `--gtf` during the run. Building an index for a mammalian genome needs far more memory than aligning against it, so reuse an existing index for real data.",
                     "fa_icon": "fas fa-bezier-curve"
+                },
+                "hisat2_build_memory": {
+                    "type": "string",
+                    "default": "200.GB",
+                    "pattern": "^\\d+(\\.\\d+)?\\.?\\s*(K|M|G|T)?B$",
+                    "description": "Memory from which the HISAT2 index is built with splice sites and exons.",
+                    "help_text": "Only used when the index is built from `--fasta` and `--gtf`. If HISAT2 build gets at least this much memory, the index contains the splice sites and exons of the GTF (full index). With less memory, a plain genome index is built (light index). The alignment gets the splice sites from the GTF in both cases. Set it to e.g. `1.GB` to force the full index on a small genome.",
+                    "fa_icon": "fas fa-memory"
                 }
             }
         }
