@@ -65,7 +65,7 @@
                     "untar": 1.34
                 },
                 "Workflow": {
-                    "SaveTheWhaIes/cwbd-project": "v1.1.0"
+                    "SaveTheWhaIes/cwbd-project": "v1.1.1"
                 }
             },
             [
@@ -432,7 +432,7 @@
                 "tpm/gene_tpm.tsv"
             ],
             [
-                "gene_counts.tsv:md5,837ccc5c3d33b1689ead6c257fa31b63",
+                "gene_counts.tsv:md5,742666ea473b42ecfe08c1ef660215c3",
                 "RAP1_UNINDUCED_REP1.featureCounts.tsv:md5,c21b23b9871bf82e7acd4150a6f9287f",
                 "RAP1_UNINDUCED_REP1.featureCounts.tsv.summary:md5,e101e3bd5d1f05fec7df8ea08a70165d",
                 "RAP1_UNINDUCED_REP2.featureCounts.tsv:md5,8dbf215e4c85cb4bdb52cae682988438",
@@ -557,7 +557,7 @@
                 "gene_tpm.tsv:md5,a8d29e1664ca190ef0f39a13024b3daa"
             ]
         ],
-        "timestamp": "2026-10-08T21:35:31.990790535",
+        "timestamp": "2026-10-11T14:11:39.345443442",
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"

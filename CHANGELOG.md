@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.1.1 - [2026-10-11]
+
+### `Fixed`
+
+- [#26](https://github.com/SaveTheWhaIes/cwbd-project/pull/26) Count table header in snake_case (`gene_id`, `gene_name`), the same as the TPM table and `docs/output.md`.
+- [#26](https://github.com/SaveTheWhaIes/cwbd-project/pull/26) Broken and cut-off comments in `bin/merge_counts.py`, `bin/merge_tpm.py` and the MERGE_COUNTS module.
+- [#26](https://github.com/SaveTheWhaIes/cwbd-project/pull/26) Count table section in `docs/output.md` rewritten.
+
 ## v1.1.0 - [2026-10-08]
 
 ### `Added`

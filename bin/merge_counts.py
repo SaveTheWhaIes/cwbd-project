@@ -34,13 +34,13 @@ def read_sample(path):
 
 def main():
 
-    # parse argum
+    # parse arguments
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("counts", nargs="+", type=Path, help=f"featureCounts tables named <sample>{SUFFIX}")
     parser.add_argument("--output", required=True, type=Path, help="Output TSV")
     args = parser.parse_args()
 
-    # read all sale
+    # read all samples
     samples = []
     counts_by_sample = {}
     gene_names = {}
@@ -53,7 +53,7 @@ def main():
 
     with open(args.output, "w", newline="") as fh:
         writer = csv.writer(fh, delimiter="\t", lineterminator="\n")
-        writer.writerow(["GeneID", "GeneName"] + samples)
+        writer.writerow(["gene_id", "gene_name"] + samples)
         for gene in sorted(gene_names):
             writer.writerow([gene, gene_names[gene]] + [counts_by_sample[s].get(gene, 0) for s in samples])
 
