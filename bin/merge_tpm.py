@@ -2,7 +2,7 @@
 """
 Merges the StringTie gene abundance tables into one genes x samples TPM table.
 
-Input: StringTie -A gene abudance files (one per sample)
+Input: StringTie -A gene abundance files (one per sample)
 Output: TSV with gene_id, gene_name and TPM values for each sample
 """
 
@@ -17,7 +17,7 @@ SUFFIX = ".gene.abundance.txt"
 # returns TPM and gene name per gene ID for one sample
 def read_sample(path):
 
-    # the twwo dictionaries to return
+    # the two dictionaries to return
     tpm = {}
     names = {}
 

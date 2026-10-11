@@ -170,11 +170,15 @@ The gene abundance tables of all samples are merged into one table by `bin/merge
 
 ### Count table
 
-<details markdown
-<summary>Output files</summary>  
-- `counts/`                                                        - `gene_counts.h one row per gene and one column per sample, holding the read counts from          featureCounts. Th_id` and`gene_name`.  
-</details>  
-The featureCounts tables of all samples are merged into one table by `bin/merrted by samplename and rows by gene ID. Unlike the TPM table, these raw counts can be used as inon tools likeDESeq2.
+<details markdown="1">
+<summary>Output files</summary>
+
+- `counts/`
+  - `gene_counts.tsv`: tab separated table with one row per gene and one column per sample, holding the read counts from featureCounts. The first two columns are `gene_id` and `gene_name`.
+
+</details>
+
+The featureCounts tables of all samples are merged into one table by `bin/merge_counts.py`. Columns are sorted by sample name and rows by gene ID. Unlike the TPM table, these raw counts can be used as input for differential expression tools like DESeq2.
 
 ### MultiQC
 

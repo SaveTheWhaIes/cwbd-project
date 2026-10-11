@@ -20,13 +20,13 @@ process MERGE_COUNTS {
     task.ext.when == null || task.ext.when
 
     // merge_counts.py lies in bin/
-    // nextflow pry task
+    // nextflow puts bin/ on the PATH for every task
     script:
     """
     merge_counts.py --output gene_counts.tsv ${counts}
     """
 
-    // creates annel logic quickly
+    // creates an empty file to test the channel logic quickly
     stub:
     """
     touch gene_counts.tsv
